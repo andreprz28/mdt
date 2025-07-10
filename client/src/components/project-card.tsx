@@ -2,6 +2,7 @@ import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { User, MapPin, Calendar, Clock } from "lucide-react";
 import { Project } from "@shared/schema";
+import { Link } from "wouter";
 
 interface ProjectCardProps {
   project: Project;
@@ -58,7 +59,8 @@ export function ProjectCard({ project, searchQuery }: ProjectCardProps) {
   const currentStageIndex = stages.indexOf(project.stage);
 
   return (
-    <div className="project-card bg-white dark:bg-gray-700 rounded-lg p-4 border border-gray-200 dark:border-gray-600 hover:shadow-lg transition-all">
+    <Link href={`/projects/${project.id}`}>
+      <div className="project-card bg-white dark:bg-gray-700 rounded-lg p-4 border border-gray-200 dark:border-gray-600 hover:shadow-lg transition-all cursor-pointer">
       <div className="flex items-start justify-between mb-3">
         <div className="flex-1">
           <div className="flex items-center gap-2 mb-2">
@@ -139,6 +141,7 @@ export function ProjectCard({ project, searchQuery }: ProjectCardProps) {
           </div>
         </div>
       )}
-    </div>
+      </div>
+    </Link>
   );
 }

@@ -1,0 +1,361 @@
+import { useQuery } from "@tanstack/react-query";
+import { useParams, Link } from "wouter";
+import { ArrowLeft, Calendar, MapPin, Users, Target, FileText, Award, Clock, AlertCircle } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Progress } from "@/components/ui/progress";
+import { Separator } from "@/components/ui/separator";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Project, Person, Document, Activity } from "@shared/schema";
+
+export default function ProjectDetail() {
+  const { id } = useParams<{ id: string }>();
+  
+  const { data: project } = useQuery({
+    queryKey: ['/api/projects', id],
+    enabled: !!id,
+  });
+
+  const { data: documents = [] } = useQuery<Document[]>({
+    queryKey: ['/api/documents', id],
+    enabled: !!id,
+  });
+
+  const { data: activities = [] } = useQuery<Activity[]>({
+    queryKey: ['/api/activities', id],
+    enabled: !!id,
+  });
+
+  if (!project) {
+    return (
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 p-6">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center py-12">
+            <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">Project not found</h1>
+            <Link href="/">
+              <Button className="mt-4">Return Home</Button>
+            </Link>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  const getStatusColor = (status: string) => {
+    switch (status) {
+      case "Active": return "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200";
+      case "Delayed": return "bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200";
+      case "On Hold": return "bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200";
+      case "Completed": return "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200";
+      default: return "bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-200";
+    }
+  };
+
+  const formatFileSize = (bytes: number | null) => {
+    if (!bytes) return "Unknown size";
+    const mb = bytes / (1024 * 1024);
+    return `${mb.toFixed(1)} MB`;
+  };
+
+  return (
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100">
+      <div className="max-w-7xl mx-auto p-6">
+        {/* Header */}
+        <div className="mb-6">
+          <Link href="/">
+            <Button variant="ghost" className="mb-4">
+              <ArrowLeft className="h-4 w-4 mr-2" />
+              Back to Projects
+            </Button>
+          </Link>
+          
+          <div className="flex items-start justify-between gap-4 mb-4">
+            <div className="flex-1">
+              <h1 className="text-3xl font-bold mb-2">{project.name}</h1>
+              <p className="text-lg text-gray-600 dark:text-gray-400 mb-4">
+                {project.description}
+              </p>
+              
+              <div className="flex items-center gap-4 flex-wrap">
+                <Badge className={`px-3 py-1 ${getStatusColor(project.status)}`}>
+                  {project.status}
+                </Badge>
+                <Badge variant="outline" className="px-3 py-1">
+                  {project.category}
+                </Badge>
+                <div className="flex items-center gap-1 text-sm text-gray-600 dark:text-gray-400">
+                  <MapPin className="h-4 w-4" />
+                  {project.location}
+                </div>
+                <div className="flex items-center gap-1 text-sm text-gray-600 dark:text-gray-400">
+                  <Calendar className="h-4 w-4" />
+                  Due: {project.deadline ? new Date(project.deadline).toLocaleDateString() : "No deadline"}
+                </div>
+              </div>
+            </div>
+            
+            <div className="text-right">
+              <div className="text-sm text-gray-600 dark:text-gray-400 mb-1">Progress</div>
+              <div className="text-2xl font-bold">{project.progress}%</div>
+              <Progress value={project.progress} className="w-24 mt-2" />
+            </div>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          {/* Main Content */}
+          <div className="lg:col-span-2 space-y-6">
+            {/* Project Overview */}
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Target className="h-5 w-5" />
+                  Project Overview
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <label className="text-sm font-medium text-gray-600 dark:text-gray-400">Function</label>
+                    <p className="mt-1">{project.function}</p>
+                  </div>
+                  <div>
+                    <label className="text-sm font-medium text-gray-600 dark:text-gray-400">Stage</label>
+                    <p className="mt-1">{project.stage}</p>
+                  </div>
+                  <div>
+                    <label className="text-sm font-medium text-gray-600 dark:text-gray-400">Project Leader</label>
+                    <p className="mt-1">{project.projectLeader}</p>
+                  </div>
+                  <div>
+                    <label className="text-sm font-medium text-gray-600 dark:text-gray-400">Team Size</label>
+                    <p className="mt-1">{project.teamMembers.length} members</p>
+                  </div>
+                </div>
+
+                <Separator />
+
+                <div>
+                  <label className="text-sm font-medium text-gray-600 dark:text-gray-400">Key Skills</label>
+                  <div className="flex flex-wrap gap-2 mt-2">
+                    {project.skills.map((skill, index) => (
+                      <Badge key={index} variant="secondary">{skill}</Badge>
+                    ))}
+                  </div>
+                </div>
+
+                <div>
+                  <label className="text-sm font-medium text-gray-600 dark:text-gray-400">Milestones</label>
+                  <ul className="mt-2 space-y-1">
+                    {project.milestones.map((milestone, index) => (
+                      <li key={index} className="flex items-center gap-2 text-sm">
+                        <Clock className="h-3 w-3 text-gray-400" />
+                        {milestone}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Documents */}
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <FileText className="h-5 w-5" />
+                  Project Documents
+                  <Badge variant="secondary" className="ml-2">{documents.length}</Badge>
+                </CardTitle>
+                <CardDescription>
+                  Technical specifications, clinical protocols, and regulatory documentation
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                {documents.length > 0 ? (
+                  <div className="space-y-3">
+                    {documents.map((doc) => (
+                      <div key={doc.id} className="border border-gray-200 dark:border-gray-700 rounded-lg p-4">
+                        <div className="flex items-start justify-between gap-4">
+                          <div className="flex-1">
+                            <div className="flex items-center gap-2 mb-2">
+                              <FileText className="h-4 w-4 text-gray-500" />
+                              <h4 className="font-medium">{doc.name}</h4>
+                              <Badge variant="outline" className="text-xs">v{doc.version}</Badge>
+                              <Badge 
+                                variant={doc.status === "active" ? "default" : "secondary"}
+                                className="text-xs"
+                              >
+                                {doc.status}
+                              </Badge>
+                            </div>
+                            <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
+                              {doc.description}
+                            </p>
+                            <div className="flex items-center gap-4 text-xs text-gray-500 dark:text-gray-400">
+                              <span>Type: {doc.type}</span>
+                              <span>Size: {formatFileSize(doc.fileSize)}</span>
+                              <span>Uploaded: {new Date(doc.uploadedAt!).toLocaleDateString()}</span>
+                            </div>
+                            {doc.metadata && Object.keys(doc.metadata).length > 0 && (
+                              <div className="mt-2 flex flex-wrap gap-1">
+                                {Object.entries(doc.metadata).map(([key, value]) => (
+                                  <Badge key={key} variant="outline" className="text-xs">
+                                    {key}: {String(value)}
+                                  </Badge>
+                                ))}
+                              </div>
+                            )}
+                          </div>
+                          <Button variant="outline" size="sm">
+                            View Document
+                          </Button>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <div className="text-center py-8 text-gray-500 dark:text-gray-400">
+                    <FileText className="h-12 w-12 mx-auto mb-3 text-gray-300" />
+                    <p>No documents uploaded yet</p>
+                    <Button variant="outline" className="mt-3" size="sm">
+                      Upload Document
+                    </Button>
+                  </div>
+                )}
+              </CardContent>
+            </Card>
+
+            {/* Recent Activity */}
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Clock className="h-5 w-5" />
+                  Recent Activity
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <ScrollArea className="max-h-60">
+                  <div className="space-y-3">
+                    {activities.length > 0 ? (
+                      activities.map((activity) => (
+                        <div key={activity.id} className="flex items-start gap-3 pb-3 border-b border-gray-100 dark:border-gray-800 last:border-0">
+                          <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0" />
+                          <div className="flex-1">
+                            <p className="text-sm">{activity.description}</p>
+                            <div className="flex items-center gap-2 mt-1 text-xs text-gray-500 dark:text-gray-400">
+                              <span>{new Date(activity.timestamp!).toLocaleDateString()}</span>
+                              {activity.type && <Badge variant="outline" className="text-xs">{activity.type}</Badge>}
+                            </div>
+                          </div>
+                        </div>
+                      ))
+                    ) : (
+                      <div className="text-center py-4 text-gray-500 dark:text-gray-400">
+                        No recent activity
+                      </div>
+                    )}
+                  </div>
+                </ScrollArea>
+              </CardContent>
+            </Card>
+          </div>
+
+          {/* Sidebar */}
+          <div className="space-y-6">
+            {/* Team Members */}
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Users className="h-5 w-5" />
+                  Team Members
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-3">
+                  {project.teamMembers.map((member, index) => (
+                    <div key={index} className="flex items-center gap-3">
+                      <Avatar className="h-8 w-8">
+                        <AvatarImage src={`https://images.unsplash.com/photo-${1500000000000 + index}?w=32&h=32&fit=crop&crop=face`} />
+                        <AvatarFallback>{member.split(' ').map(n => n[0]).join('')}</AvatarFallback>
+                      </Avatar>
+                      <div className="flex-1">
+                        <p className="text-sm font-medium">{member}</p>
+                        <p className="text-xs text-gray-500 dark:text-gray-400">
+                          {project.roles[index] || "Team Member"}
+                        </p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Quick Stats */}
+            <Card>
+              <CardHeader>
+                <CardTitle>Quick Stats</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="flex justify-between items-center">
+                  <span className="text-sm text-gray-600 dark:text-gray-400">Documents</span>
+                  <span className="font-medium">{documents.length}</span>
+                </div>
+                <div className="flex justify-between items-center">
+                  <span className="text-sm text-gray-600 dark:text-gray-400">Activities</span>
+                  <span className="font-medium">{activities.length}</span>
+                </div>
+                <div className="flex justify-between items-center">
+                  <span className="text-sm text-gray-600 dark:text-gray-400">Team Size</span>
+                  <span className="font-medium">{project.teamMembers.length}</span>
+                </div>
+                <div className="flex justify-between items-center">
+                  <span className="text-sm text-gray-600 dark:text-gray-400">Progress</span>
+                  <span className="font-medium">{project.progress}%</span>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Related Patents */}
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Award className="h-5 w-5" />
+                  Related Patents
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-3">
+                  {/* Mock patent data for demonstration */}
+                  {[
+                    { id: "US11234567", title: "Advanced Glucose Monitoring System", year: "2023", inventor: "Sarah Johnson" },
+                    { id: "US11234568", title: "Automated Insulin Delivery Algorithm", year: "2022", inventor: "Dr. Emily Chen" },
+                    { id: "US11234569", title: "Continuous Glucose Sensor Design", year: "2023", inventor: "Sarah Johnson" }
+                  ].map((patent) => (
+                    <div key={patent.id} className="border border-gray-200 dark:border-gray-700 rounded-lg p-3">
+                      <div className="flex items-start justify-between gap-2">
+                        <div className="flex-1">
+                          <h4 className="font-medium text-sm">{patent.title}</h4>
+                          <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
+                            {patent.id} • {patent.year}
+                          </p>
+                          <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                            Inventor: {patent.inventor}
+                          </p>
+                        </div>
+                        <Button variant="outline" size="sm" className="text-xs h-7">
+                          View
+                        </Button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}

@@ -1,5 +1,6 @@
 import { Badge } from "@/components/ui/badge";
 import { Person } from "@shared/schema";
+import { Link } from "wouter";
 
 interface PeopleCardProps {
   person: Person;
@@ -39,7 +40,8 @@ export function PeopleCard({ person, searchQuery }: PeopleCardProps) {
   };
 
   return (
-    <div className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 cursor-pointer transition-colors">
+    <Link href={`/people/${person.id}`}>
+      <div className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 cursor-pointer transition-colors">
       <div className="w-12 h-12 bg-[hsl(207,90%,54%)] rounded-full flex items-center justify-center text-white font-semibold">
         {person.avatar ? (
           <img 
@@ -69,6 +71,7 @@ export function PeopleCard({ person, searchQuery }: PeopleCardProps) {
           </span>
         </div>
       </div>
-    </div>
+      </div>
+    </Link>
   );
 }
