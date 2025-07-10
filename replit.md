@@ -13,6 +13,7 @@ Preferred communication style: Simple, everyday language.
 ✅ Updated application title to "MedMilestones" with new logo - COMPLETED (July 10, 2025)
 ✅ Removed team overview section from homepage - COMPLETED (July 10, 2025)
 ✅ Replaced document upload button with "Agile Integration Coming Soon" message - COMPLETED (July 10, 2025)
+✅ Implemented subtle background motion for engaging experience - COMPLETED (July 10, 2025)
 ✅ Add DRM belt icons (black, green, yellow) and fellowship indicators (tech fellow, bakken fellow) to person profiles - COMPLETED
 ✅ Make abstracts and patents sections interactive with detailed information (title, conference, date, description, contributors) - COMPLETED
 ✅ Add connection map/network to show individual connections to projects through skills and relationships - COMPLETED
