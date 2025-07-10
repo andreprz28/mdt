@@ -105,6 +105,7 @@ export class MemStorage implements IStorage {
       roles: project.roles || [],
       skills: project.skills || [],
       milestones: project.milestones || [],
+      recentActivity: project.recentActivity || [],
       createdAt: now,
       updatedAt: now,
     };
