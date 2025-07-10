@@ -25,10 +25,23 @@ export default function Home() {
 
   const { filters, setFilters, searchQuery, setSearchQuery } = useSearch();
 
-  const { data: searchResults, isLoading } = useQuery({
+  const { data: searchResults, isLoading: searchLoading } = useQuery({
     queryKey: ['/api/search', filters],
     enabled: Object.keys(filters).length > 0 || searchQuery.length > 0,
   });
+
+  // Default queries for all projects and people when no search is active
+  const { data: allProjects, isLoading: projectsLoading } = useQuery({
+    queryKey: ['/api/projects'],
+    enabled: Object.keys(filters).length === 0 && searchQuery.length === 0,
+  });
+
+  const { data: allPeople, isLoading: peopleLoading } = useQuery({
+    queryKey: ['/api/people'],
+    enabled: Object.keys(filters).length === 0 && searchQuery.length === 0,
+  });
+
+  const isLoading = searchLoading || projectsLoading || peopleLoading;
 
   const { data: dashboardStats } = useQuery({
     queryKey: ['/api/dashboard/stats'],
@@ -76,8 +89,8 @@ export default function Home() {
     }
   };
 
-  const projects = searchResults?.projects || [];
-  const people = searchResults?.people || [];
+  const projects = searchResults?.projects || allProjects || [];
+  const people = searchResults?.people || allPeople || [];
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors">
