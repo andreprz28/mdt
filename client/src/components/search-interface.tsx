@@ -17,7 +17,6 @@ export function SearchInterface({ onSearch, filters, onFiltersChange }: SearchIn
   const handleSearchChange = (value: string) => {
     setSearchQuery(value);
     onSearch(value);
-    onFiltersChange({ ...filters, query: value });
   };
 
   const handleFilterChange = (key: keyof SearchFilters, value: string) => {
@@ -29,7 +28,8 @@ export function SearchInterface({ onSearch, filters, onFiltersChange }: SearchIn
 
   const clearFilters = () => {
     setSearchQuery("");
-    onFiltersChange({ query: "" });
+    onSearch("");
+    onFiltersChange({});
   };
 
   const searchSuggestions = [

@@ -26,7 +26,18 @@ export default function Home() {
   const { filters, setFilters, searchQuery, setSearchQuery } = useSearch();
 
   const { data: searchResults, isLoading: searchLoading } = useQuery({
-    queryKey: ['/api/search', filters],
+    queryKey: ['/api/search', { ...filters, query: searchQuery }],
+    queryFn: async () => {
+      const searchParams = new URLSearchParams();
+      if (searchQuery) searchParams.append('query', searchQuery);
+      Object.entries(filters).forEach(([key, value]) => {
+        if (value) searchParams.append(key, value);
+      });
+      
+      const response = await fetch(`/api/search?${searchParams.toString()}`);
+      if (!response.ok) throw new Error('Search failed');
+      return response.json();
+    },
     enabled: Object.keys(filters).length > 0 || searchQuery.length > 0,
   });
 
