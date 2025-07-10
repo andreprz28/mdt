@@ -24,6 +24,26 @@ export async function loadSampleData(storage: IStorage) {
       ]
     },
     {
+      name: "Guardian CGM Real-Time Monitoring",
+      description: "Continuous glucose monitoring system with smartphone integration and predictive low glucose alerts",
+      status: "Active",
+      category: "Diabetes",
+      function: "R&D",
+      location: "Fridley",
+      stage: "Testing",
+      progress: 72,
+      deadline: "2024-09-30",
+      projectLeader: "Dr. Emily Chen",
+      teamMembers: ["Dr. Emily Chen", "Sarah Johnson", "James Wilson"],
+      roles: ["Clinical Lead", "Systems Engineer", "Software Developer"],
+      skills: ["Glucose Monitoring", "Mobile Apps", "Data Analytics"],
+      milestones: ["Sensor Validation Q2", "App Beta Testing Q3", "Regulatory Q4"],
+      recentActivity: [
+        { description: "Mobile app UI/UX review completed", time: "1 hour ago" },
+        { description: "Sensor accuracy testing in progress", time: "3 hours ago" }
+      ]
+    },
+    {
       name: "Transcatheter Aortic Valve Replacement",
       description: "Minimally invasive valve replacement technology for severe aortic stenosis patients",
       status: "Active",
@@ -41,6 +61,26 @@ export async function loadSampleData(storage: IStorage) {
       recentActivity: [
         { description: "Biocompatibility Test Report uploaded", time: "4 hours ago" },
         { description: "Design Review Meeting scheduled", time: "2 days ago" }
+      ]
+    },
+    {
+      name: "Implantable Cardiac Defibrillator",
+      description: "Advanced ICD with remote monitoring and AI-powered arrhythmia detection",
+      status: "Active",
+      category: "Cardiac",
+      function: "R&D",
+      location: "Minneapolis",
+      stage: "Development",
+      progress: 58,
+      deadline: "2024-11-15",
+      projectLeader: "Dr. Robert Kim",
+      teamMembers: ["Dr. Robert Kim", "Lisa Wang", "Carlos Rodriguez"],
+      roles: ["Cardiac Specialist", "Regulatory Affairs", "Hardware Engineer"],
+      skills: ["Cardiac Rhythms", "Remote Monitoring", "Battery Technology"],
+      milestones: ["Prototype Testing Q2", "Clinical Validation Q3", "FDA Review Q4"],
+      recentActivity: [
+        { description: "Battery life optimization completed", time: "5 hours ago" },
+        { description: "Arrhythmia detection algorithm updated", time: "1 day ago" }
       ]
     },
     {
@@ -64,6 +104,26 @@ export async function loadSampleData(storage: IStorage) {
       ]
     },
     {
+      name: "Deep Brain Stimulation Platform",
+      description: "Advanced DBS system for Parkinson's disease with adaptive stimulation algorithms",
+      status: "Active",
+      category: "Neuromodulation",
+      function: "R&D",
+      location: "Minneapolis",
+      stage: "Validation",
+      progress: 78,
+      deadline: "2024-07-20",
+      projectLeader: "Dr. Amanda Rodriguez",
+      teamMembers: ["Dr. Amanda Rodriguez", "Jennifer Liu", "Dr. Michael Patel"],
+      roles: ["Clinical Director", "Product Manager", "Neurosurgeon"],
+      skills: ["Deep Brain Stimulation", "Parkinson's Research", "Surgical Implants"],
+      milestones: ["Clinical Trial Complete Q1", "FDA Submission Q2", "Launch Q3"],
+      recentActivity: [
+        { description: "Clinical trial data analysis completed", time: "2 hours ago" },
+        { description: "FDA pre-submission meeting scheduled", time: "1 day ago" }
+      ]
+    },
+    {
       name: "AI-Powered Surgical Navigation",
       description: "Machine learning-enhanced surgical guidance system with real-time imaging",
       status: "Planning",
@@ -81,6 +141,66 @@ export async function loadSampleData(storage: IStorage) {
       recentActivity: [
         { description: "Market Research Report completed", time: "1 day ago" },
         { description: "Initial Concept Presentation scheduled", time: "1 week ago" }
+      ]
+    },
+    {
+      name: "Robotic Surgical System",
+      description: "Next-generation robotic platform for minimally invasive spine surgery",
+      status: "Active",
+      category: "Surgical",
+      function: "R&D",
+      location: "Dublin",
+      stage: "Testing",
+      progress: 63,
+      deadline: "2024-12-31",
+      projectLeader: "Dr. Elena Vasquez",
+      teamMembers: ["Dr. Elena Vasquez", "Quinn Johnson", "Marcus Thompson"],
+      roles: ["Surgical Lead", "Robotics Engineer", "Systems Integrator"],
+      skills: ["Robotic Surgery", "Spine Procedures", "Precision Engineering"],
+      milestones: ["Prototype Demo Q2", "Surgeon Training Q3", "Clinical Pilot Q4"],
+      recentActivity: [
+        { description: "Robotic arm calibration completed", time: "3 hours ago" },
+        { description: "Surgeon feedback session scheduled", time: "2 days ago" }
+      ]
+    },
+    {
+      name: "Patient Remote Monitoring Platform",
+      description: "Comprehensive digital health platform for chronic disease management",
+      status: "Active",
+      category: "Digital Health",
+      function: "R&D",
+      location: "Remote",
+      stage: "Development",
+      progress: 52,
+      deadline: "2024-10-15",
+      projectLeader: "Taylor Brown",
+      teamMembers: ["Taylor Brown", "Alex Park", "Dr. Samantha Lee"],
+      roles: ["Digital Health Lead", "Software Architect", "Clinical Informaticist"],
+      skills: ["Digital Health", "Cloud Computing", "Data Security"],
+      milestones: ["MVP Launch Q2", "Pilot Programs Q3", "Scale Deployment Q4"],
+      recentActivity: [
+        { description: "HIPAA compliance review completed", time: "1 hour ago" },
+        { description: "Patient portal beta testing started", time: "4 hours ago" }
+      ]
+    },
+    {
+      name: "AI Diagnostic Assistant",
+      description: "Machine learning platform for early disease detection and diagnostic support",
+      status: "Planning",
+      category: "Digital Health",
+      function: "R&D",
+      location: "Shanghai",
+      stage: "Concept",
+      progress: 25,
+      deadline: "2025-01-30",
+      projectLeader: "Dr. Wei Zhang",
+      teamMembers: ["Dr. Wei Zhang", "Alex Park", "Dr. Priya Sharma"],
+      roles: ["AI Research Lead", "Data Scientist", "Clinical Advisor"],
+      skills: ["Machine Learning", "Medical AI", "Diagnostic Imaging"],
+      milestones: ["Algorithm Development Q1", "Clinical Validation Q2", "Regulatory Q3"],
+      recentActivity: [
+        { description: "Training dataset compilation started", time: "2 hours ago" },
+        { description: "Ethics committee review requested", time: "1 week ago" }
       ]
     }
   ];
@@ -103,6 +223,21 @@ export async function loadSampleData(storage: IStorage) {
       achievements: ["FDA Breakthrough Device Designation", "Medtronic Innovation Award 2023"]
     },
     {
+      name: "Dr. Emily Chen",
+      title: "Clinical Research Director",
+      function: "Clinical",
+      location: "Fridley",
+      email: "emily.chen@medtronic.com",
+      avatar: "https://images.unsplash.com/photo-1551836022-deb4988cc6c0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=64&h=64",
+      skills: ["Clinical Trials", "Diabetes Research", "Glucose Monitoring", "Data Analytics"],
+      patents: 6,
+      publications: 12,
+      yearsExperience: 10,
+      bio: "Clinical research specialist focusing on diabetes care and continuous glucose monitoring technologies.",
+      education: ["MD Endocrinology - Mayo Clinic", "PhD Clinical Research - University of Minnesota"],
+      achievements: ["ADA Clinical Excellence Award", "Diabetes Technology Innovation Grant"]
+    },
+    {
       name: "Dr. Michael Chen",
       title: "Principal Clinical Researcher",
       function: "Clinical",
@@ -118,6 +253,21 @@ export async function loadSampleData(storage: IStorage) {
       achievements: ["American Heart Association Fellow", "Published 15 peer-reviewed papers"]
     },
     {
+      name: "Dr. Robert Kim",
+      title: "Senior Cardiac Specialist",
+      function: "R&D",
+      location: "Minneapolis",
+      email: "robert.kim@medtronic.com",
+      avatar: "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=64&h=64",
+      skills: ["Cardiac Rhythms", "Defibrillator Technology", "Remote Monitoring", "Battery Optimization"],
+      patents: 14,
+      publications: 9,
+      yearsExperience: 18,
+      bio: "Expert in implantable cardiac devices with extensive experience in defibrillator technology.",
+      education: ["MD Cardiology - Johns Hopkins", "MS Biomedical Engineering - Duke"],
+      achievements: ["Heart Rhythm Society Fellow", "Medtronic Cardiac Innovation Award"]
+    },
+    {
       name: "Jennifer Liu",
       title: "Lead Product Manager",
       function: "R&D",
@@ -131,6 +281,111 @@ export async function loadSampleData(storage: IStorage) {
       bio: "Product management leader with deep expertise in neuromodulation technologies.",
       education: ["MBA - Wharton School", "MS Biomedical Engineering - Johns Hopkins"],
       achievements: ["Medtronic Rising Star Award", "Chronic Pain Innovation Patent"]
+    },
+    {
+      name: "Dr. Amanda Rodriguez",
+      title: "Principal Neurosurgeon",
+      function: "Clinical",
+      location: "Minneapolis",
+      email: "amanda.rodriguez@medtronic.com",
+      avatar: "https://images.unsplash.com/photo-1582750433449-648ed127bb54?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=64&h=64",
+      skills: ["Deep Brain Stimulation", "Parkinson's Research", "Surgical Implants", "Neurosurgery"],
+      patents: 11,
+      publications: 22,
+      yearsExperience: 16,
+      bio: "Leading neurosurgeon specializing in deep brain stimulation and movement disorders.",
+      education: ["MD Neurosurgery - Mayo Clinic", "PhD Neuroscience - Harvard"],
+      achievements: ["International Neuromodulation Society Award", "Parkinson's Foundation Research Grant"]
+    },
+    {
+      name: "Dr. Elena Vasquez",
+      title: "Robotic Surgery Lead",
+      function: "R&D",
+      location: "Dublin",
+      email: "elena.vasquez@medtronic.com",
+      avatar: "https://images.unsplash.com/photo-1582750433449-648ed127bb54?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=64&h=64",
+      skills: ["Robotic Surgery", "Spine Procedures", "Precision Engineering", "Surgical Navigation"],
+      patents: 9,
+      publications: 7,
+      yearsExperience: 13,
+      bio: "Robotic surgery expert with focus on minimally invasive spine procedures.",
+      education: ["MD Orthopedic Surgery - University of Barcelona", "MS Robotics - MIT"],
+      achievements: ["European Spine Society Innovation Award", "Robotic Surgery Pioneer Award"]
+    },
+    {
+      name: "Quinn Johnson",
+      title: "Senior Software Engineer",
+      function: "R&D",
+      location: "Dublin",
+      email: "quinn.johnson@medtronic.com",
+      avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=64&h=64",
+      skills: ["Machine Learning", "Medical Imaging", "Software Architecture", "Real-time Systems"],
+      patents: 3,
+      publications: 4,
+      yearsExperience: 7,
+      bio: "Software engineering specialist in medical imaging and machine learning applications.",
+      education: ["MS Computer Science - Trinity College Dublin", "BS Software Engineering - University College Dublin"],
+      achievements: ["Medical AI Innovation Award", "Best Paper Award - Medical Imaging Conference"]
+    },
+    {
+      name: "Taylor Brown",
+      title: "Digital Health Director",
+      function: "R&D",
+      location: "Remote",
+      email: "taylor.brown@medtronic.com",
+      avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=64&h=64",
+      skills: ["Digital Health", "Cloud Computing", "Data Security", "Healthcare Analytics"],
+      patents: 2,
+      publications: 5,
+      yearsExperience: 9,
+      bio: "Digital health innovation leader focused on remote patient monitoring and healthcare data platforms.",
+      education: ["MBA Healthcare Management - Northwestern", "MS Health Informatics - UCSF"],
+      achievements: ["Digital Health Innovation Award", "Healthcare IT Excellence Recognition"]
+    },
+    {
+      name: "Dr. Wei Zhang",
+      title: "AI Research Director",
+      function: "R&D",
+      location: "Shanghai",
+      email: "wei.zhang@medtronic.com",
+      avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=64&h=64",
+      skills: ["Machine Learning", "Medical AI", "Diagnostic Imaging", "Deep Learning"],
+      patents: 7,
+      publications: 18,
+      yearsExperience: 11,
+      bio: "AI research leader specializing in medical diagnostic applications and machine learning.",
+      education: ["PhD Computer Science - Tsinghua University", "MS Artificial Intelligence - Stanford"],
+      achievements: ["AI in Healthcare Award", "Nature Medicine Publication", "Medical AI Patent Portfolio"]
+    },
+    {
+      name: "Lisa Wang",
+      title: "Regulatory Affairs Manager",
+      function: "Regulatory",
+      location: "Santa Rosa",
+      email: "lisa.wang@medtronic.com",
+      avatar: "https://images.unsplash.com/photo-1551836022-deb4988cc6c0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=64&h=64",
+      skills: ["FDA Compliance", "Regulatory Strategy", "Clinical Documentation", "Quality Assurance"],
+      patents: 1,
+      publications: 2,
+      yearsExperience: 6,
+      bio: "Regulatory affairs expert with focus on cardiac device approvals and FDA submissions.",
+      education: ["MS Regulatory Science - USC", "BS Biomedical Engineering - UC San Diego"],
+      achievements: ["FDA Breakthrough Device Designation", "Regulatory Excellence Award"]
+    },
+    {
+      name: "Alex Park",
+      title: "Senior Data Scientist",
+      function: "R&D",
+      location: "Remote",
+      email: "alex.park@medtronic.com",
+      avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=64&h=64",
+      skills: ["Data Science", "Healthcare Analytics", "Machine Learning", "Statistical Analysis"],
+      patents: 4,
+      publications: 6,
+      yearsExperience: 8,
+      bio: "Data scientist specializing in healthcare analytics and predictive modeling for medical devices.",
+      education: ["PhD Statistics - University of Washington", "MS Data Science - Carnegie Mellon"],
+      achievements: ["Healthcare Data Science Award", "Predictive Analytics Innovation"]
     }
   ];
 
