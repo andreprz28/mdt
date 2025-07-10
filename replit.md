@@ -8,6 +8,17 @@ This is a full-stack web application designed for managing project intelligence 
 
 Preferred communication style: Simple, everyday language.
 
+### Recent Feature Requests (July 10, 2025):
+- Add DRM belt icons (black, green, yellow) and fellowship indicators (tech fellow, bakken fellow) to person profiles
+- Make abstracts and patents sections interactive with detailed information (title, conference, date, description, contributors)
+- Add connection map/network to show individual connections to projects through skills and relationships
+- Enhance AI capabilities for broader project management questions (finding best person for specific problems)
+- Add project timelines based on development phases (R&D, clinical trials, FDA approval)
+- Include mock documents, bill of materials, parts, and drawings in projects
+- Default homepage to show team statistics and project numbers
+- Make team member names clickable links to their profiles in project pages
+- Add cornerstone trainings to education section in personal profiles
+
 ## System Architecture
 
 ### Frontend Architecture
