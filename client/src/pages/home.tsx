@@ -110,7 +110,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-4">
             <div className="flex items-center gap-3">
-              <img src="/attached_assets/2_1752183035463.png" alt="MedMilestones Logo" className="w-10 h-10 rounded-lg" />
+              <img src="/attached_assets/2_1752184137395.png" alt="MedMilestones Logo" className="w-10 h-10 rounded-lg" />
               <div>
                 <h1 className="text-xl font-bold text-gray-900 dark:text-white">MedMilestones</h1>
                 <p className="text-sm text-gray-600 dark:text-gray-400">Medical Device Project Intelligence</p>
