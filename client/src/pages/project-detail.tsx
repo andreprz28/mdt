@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { useParams, Link } from "wouter";
-import { ArrowLeft, Calendar, MapPin, Users, Target, FileText, Award, Clock, AlertCircle } from "lucide-react";
+import { ArrowLeft, Calendar, MapPin, Users, Target, FileText, Award, Clock, AlertCircle, Package, Wrench, Image, Factory } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -161,70 +161,240 @@ export default function ProjectDetail() {
               </CardContent>
             </Card>
 
-            {/* Documents */}
+            {/* Enhanced Project Documents */}
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <FileText className="h-5 w-5" />
-                  Project Documents
-                  <Badge variant="secondary" className="ml-2">{documents.length}</Badge>
+                  Project Documents & Design Materials
                 </CardTitle>
                 <CardDescription>
-                  Technical specifications, clinical protocols, and regulatory documentation
+                  Complete technical documentation, drawings, parts specifications, and bill of materials
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                {documents.length > 0 ? (
-                  <div className="space-y-3">
-                    {documents.map((doc) => (
-                      <div key={doc.id} className="border border-gray-200 dark:border-gray-700 rounded-lg p-4">
-                        <div className="flex items-start justify-between gap-4">
-                          <div className="flex-1">
-                            <div className="flex items-center gap-2 mb-2">
-                              <FileText className="h-4 w-4 text-gray-500" />
-                              <h4 className="font-medium">{doc.name}</h4>
-                              <Badge variant="outline" className="text-xs">v{doc.version}</Badge>
-                              <Badge 
-                                variant={doc.status === "active" ? "default" : "secondary"}
-                                className="text-xs"
-                              >
-                                {doc.status}
-                              </Badge>
-                            </div>
-                            <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
-                              {doc.description}
-                            </p>
-                            <div className="flex items-center gap-4 text-xs text-gray-500 dark:text-gray-400">
-                              <span>Type: {doc.type}</span>
-                              <span>Size: {formatFileSize(doc.fileSize)}</span>
-                              <span>Uploaded: {new Date(doc.uploadedAt!).toLocaleDateString()}</span>
-                            </div>
-                            {doc.metadata && Object.keys(doc.metadata).length > 0 && (
-                              <div className="mt-2 flex flex-wrap gap-1">
-                                {Object.entries(doc.metadata).map(([key, value]) => (
-                                  <Badge key={key} variant="outline" className="text-xs">
-                                    {key}: {String(value)}
+                <div className="space-y-6">
+                  {/* Mock Documents */}
+                  {project.mockDocuments && project.mockDocuments.length > 0 && (
+                    <div>
+                      <h4 className="font-semibold mb-3 flex items-center gap-2">
+                        <FileText className="h-4 w-4" />
+                        Project Documents
+                        <Badge variant="secondary">{project.mockDocuments.length}</Badge>
+                      </h4>
+                      <div className="grid gap-3">
+                        {project.mockDocuments.map((doc: any) => (
+                          <div key={doc.id} className="border border-gray-200 dark:border-gray-700 rounded-lg p-4">
+                            <div className="flex items-start justify-between gap-4">
+                              <div className="flex-1">
+                                <div className="flex items-center gap-2 mb-2">
+                                  <FileText className="h-4 w-4 text-gray-500" />
+                                  <h5 className="font-medium">{doc.name}</h5>
+                                  <Badge variant="outline" className="text-xs">v{doc.version}</Badge>
+                                  <Badge 
+                                    variant={doc.status === "Current" ? "default" : "secondary"}
+                                    className="text-xs"
+                                  >
+                                    {doc.status}
                                   </Badge>
-                                ))}
+                                </div>
+                                <div className="flex items-center gap-4 text-xs text-gray-500 dark:text-gray-400">
+                                  <span>Type: {doc.type}</span>
+                                  <span>Size: {doc.size}</span>
+                                  <span>Updated: {doc.uploadedAt}</span>
+                                  <span>By: {doc.uploadedBy}</span>
+                                </div>
                               </div>
-                            )}
+                              <Button variant="outline" size="sm">
+                                Download
+                              </Button>
+                            </div>
                           </div>
-                          <Button variant="outline" size="sm">
-                            View Document
-                          </Button>
-                        </div>
+                        ))}
                       </div>
-                    ))}
-                  </div>
-                ) : (
-                  <div className="text-center py-8 text-gray-500 dark:text-gray-400">
-                    <FileText className="h-12 w-12 mx-auto mb-3 text-gray-300" />
-                    <p>No documents uploaded yet</p>
-                    <Button variant="outline" className="mt-3" size="sm">
-                      Upload Document
-                    </Button>
-                  </div>
-                )}
+                    </div>
+                  )}
+
+                  {/* Bill of Materials */}
+                  {project.billOfMaterials && project.billOfMaterials.length > 0 && (
+                    <div>
+                      <h4 className="font-semibold mb-3 flex items-center gap-2">
+                        <Package className="h-4 w-4" />
+                        Bill of Materials
+                        <Badge variant="secondary">{project.billOfMaterials.length} items</Badge>
+                      </h4>
+                      <div className="overflow-x-auto">
+                        <table className="w-full text-sm">
+                          <thead>
+                            <tr className="border-b">
+                              <th className="text-left py-2">Part Number</th>
+                              <th className="text-left py-2">Description</th>
+                              <th className="text-center py-2">Qty</th>
+                              <th className="text-right py-2">Unit Cost</th>
+                              <th className="text-left py-2">Supplier</th>
+                              <th className="text-center py-2">Lead Time</th>
+                              <th className="text-center py-2">Criticality</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {project.billOfMaterials.map((item: any, index: number) => (
+                              <tr key={index} className="border-b">
+                                <td className="py-2 font-mono text-xs">{item.partNumber}</td>
+                                <td className="py-2">{item.description}</td>
+                                <td className="py-2 text-center">{item.quantity}</td>
+                                <td className="py-2 text-right font-mono">${item.unitCost.toFixed(2)}</td>
+                                <td className="py-2 text-xs">{item.supplier}</td>
+                                <td className="py-2 text-center text-xs">{item.leadTime}</td>
+                                <td className="py-2 text-center">
+                                  <Badge 
+                                    variant={item.criticality === "Critical" ? "destructive" : 
+                                            item.criticality === "High" ? "default" : "secondary"}
+                                    className="text-xs"
+                                  >
+                                    {item.criticality}
+                                  </Badge>
+                                </td>
+                              </tr>
+                            ))}
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Parts Information */}
+                  {project.parts && project.parts.length > 0 && (
+                    <div>
+                      <h4 className="font-semibold mb-3 flex items-center gap-2">
+                        <Wrench className="h-4 w-4" />
+                        Part Specifications
+                        <Badge variant="secondary">{project.parts.length} parts</Badge>
+                      </h4>
+                      <div className="grid gap-3">
+                        {project.parts.map((part: any, index: number) => (
+                          <div key={index} className="border border-gray-200 dark:border-gray-700 rounded-lg p-4">
+                            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+                              <div>
+                                <label className="text-xs font-medium text-gray-600 dark:text-gray-400">Part Number</label>
+                                <p className="text-sm font-mono">{part.partNumber}</p>
+                              </div>
+                              <div>
+                                <label className="text-xs font-medium text-gray-600 dark:text-gray-400">Name</label>
+                                <p className="text-sm">{part.name}</p>
+                              </div>
+                              <div>
+                                <label className="text-xs font-medium text-gray-600 dark:text-gray-400">Material</label>
+                                <p className="text-sm">{part.material}</p>
+                              </div>
+                              <div>
+                                <label className="text-xs font-medium text-gray-600 dark:text-gray-400">Category</label>
+                                <p className="text-sm">{part.category}</p>
+                              </div>
+                              <div>
+                                <label className="text-xs font-medium text-gray-600 dark:text-gray-400">Dimensions</label>
+                                <p className="text-sm font-mono">{part.dimensions}</p>
+                              </div>
+                              <div>
+                                <label className="text-xs font-medium text-gray-600 dark:text-gray-400">Weight</label>
+                                <p className="text-sm">{part.weight}</p>
+                              </div>
+                              <div>
+                                <label className="text-xs font-medium text-gray-600 dark:text-gray-400">Sterilization</label>
+                                <p className="text-sm">{part.sterilization}</p>
+                              </div>
+                              <div>
+                                <label className="text-xs font-medium text-gray-600 dark:text-gray-400">Shelf Life</label>
+                                <p className="text-sm">{part.shelfLife}</p>
+                              </div>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Technical Drawings */}
+                  {project.drawings && project.drawings.length > 0 && (
+                    <div>
+                      <h4 className="font-semibold mb-3 flex items-center gap-2">
+                        <Image className="h-4 w-4" />
+                        Technical Drawings
+                        <Badge variant="secondary">{project.drawings.length} drawings</Badge>
+                      </h4>
+                      <div className="grid gap-3">
+                        {project.drawings.map((drawing: any, index: number) => (
+                          <div key={index} className="border border-gray-200 dark:border-gray-700 rounded-lg p-4">
+                            <div className="flex items-start justify-between gap-4">
+                              <div className="flex-1">
+                                <div className="flex items-center gap-2 mb-2">
+                                  <Image className="h-4 w-4 text-gray-500" />
+                                  <h5 className="font-medium">{drawing.title}</h5>
+                                  <Badge variant="outline" className="text-xs">{drawing.revision}</Badge>
+                                </div>
+                                <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 text-xs text-gray-500 dark:text-gray-400">
+                                  <span>Drawing #: {drawing.drawingNumber}</span>
+                                  <span>Type: {drawing.type}</span>
+                                  <span>Format: {drawing.format}</span>
+                                  <span>Pages: {drawing.pages}</span>
+                                  <span>Date: {drawing.date}</span>
+                                  <span>Engineer: {drawing.engineer}</span>
+                                </div>
+                              </div>
+                              <Button variant="outline" size="sm">
+                                View Drawing
+                              </Button>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Document Revisions */}
+                  {project.revisions && project.revisions.length > 0 && (
+                    <div>
+                      <h4 className="font-semibold mb-3 flex items-center gap-2">
+                        <Clock className="h-4 w-4" />
+                        Document Revisions
+                        <Badge variant="secondary">{project.revisions.length} revisions</Badge>
+                      </h4>
+                      <div className="space-y-2">
+                        {project.revisions.map((revision: any, index: number) => (
+                          <div key={index} className="border border-gray-200 dark:border-gray-700 rounded-lg p-3">
+                            <div className="flex items-start justify-between gap-4">
+                              <div className="flex-1">
+                                <div className="flex items-center gap-2 mb-1">
+                                  <Badge variant="outline" className="text-xs">v{revision.version}</Badge>
+                                  <span className="text-sm font-medium">{revision.changes}</span>
+                                  <Badge 
+                                    variant={revision.reviewStatus === "Approved" ? "default" : "secondary"}
+                                    className="text-xs"
+                                  >
+                                    {revision.reviewStatus}
+                                  </Badge>
+                                </div>
+                                <div className="text-xs text-gray-500 dark:text-gray-400">
+                                  {revision.date} • {revision.author}
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Upload Documents */}
+                  {(!project.mockDocuments || project.mockDocuments.length === 0) && (
+                    <div className="text-center py-8 text-gray-500 dark:text-gray-400">
+                      <FileText className="h-12 w-12 mx-auto mb-3 text-gray-300" />
+                      <p>No documents uploaded yet</p>
+                      <Button variant="outline" className="mt-3" size="sm">
+                        Upload Document
+                      </Button>
+                    </div>
+                  )}
+                </div>
               </CardContent>
             </Card>
 

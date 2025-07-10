@@ -21,10 +21,12 @@ export const projects = pgTable("projects", {
   recentActivity: jsonb("recent_activity").default([]),
   // New fields for enhanced features
   timeline: jsonb("timeline").default([]), // Project timeline with phases
+  manufacturingSites: jsonb("manufacturing_sites").default([]), // Manufacturing facilities
   billOfMaterials: jsonb("bill_of_materials").default([]), // BOM data
   parts: jsonb("parts").default([]), // Parts data
   drawings: jsonb("drawings").default([]), // Drawings data
   mockDocuments: jsonb("mock_documents").default([]), // Mock document references
+  revisions: jsonb("revisions").default([]), // Document revisions
   createdAt: timestamp("created_at").defaultNow(),
   updatedAt: timestamp("updated_at").defaultNow(),
 });

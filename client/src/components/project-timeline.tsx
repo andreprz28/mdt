@@ -1,6 +1,6 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Calendar, CheckCircle, Clock, AlertCircle, Play } from "lucide-react";
+import { Calendar, CheckCircle, Clock, AlertCircle, Play, Factory, MapPin } from "lucide-react";
 import { format } from "date-fns";
 
 interface TimelinePhase {
@@ -14,12 +14,24 @@ interface TimelinePhase {
   deliverables?: string[];
 }
 
+interface ManufacturingSite {
+  id: string;
+  name: string;
+  location: string;
+  type: string;
+  capacity: string;
+  status: "active" | "planned" | "candidate";
+  specializations: string[];
+  qualifications?: string[];
+}
+
 interface ProjectTimelineProps {
   timeline: TimelinePhase[];
   projectName: string;
+  manufacturingSites?: ManufacturingSite[];
 }
 
-export function ProjectTimeline({ timeline, projectName }: ProjectTimelineProps) {
+export function ProjectTimeline({ timeline, projectName, manufacturingSites }: ProjectTimelineProps) {
   const getStatusIcon = (status: string) => {
     switch (status) {
       case "completed":
@@ -132,20 +144,57 @@ export function ProjectTimeline({ timeline, projectName }: ProjectTimelineProps)
 
   const timelineData = timeline && timeline.length > 0 ? timeline : defaultTimeline;
 
+  // Default manufacturing sites if none provided
+  const defaultManufacturingSites: ManufacturingSite[] = [
+    {
+      id: "minnesota",
+      name: "Medtronic Minneapolis",
+      location: "Minneapolis, Minnesota, USA",
+      type: "Primary Manufacturing",
+      capacity: "High Volume",
+      status: "active",
+      specializations: ["Diabetes devices", "Insulin pumps", "CGM sensors"],
+      qualifications: ["ISO 13485", "FDA 510(k)", "CE Mark"]
+    },
+    {
+      id: "ireland",
+      name: "Medtronic Galway",
+      location: "Galway, Ireland",
+      type: "Manufacturing & Distribution",
+      capacity: "Medium Volume", 
+      status: "candidate",
+      specializations: ["Medical devices", "Quality control", "European distribution"],
+      qualifications: ["ISO 13485", "CE Mark", "MHRA"]
+    },
+    {
+      id: "puerto-rico",
+      name: "Medtronic Juncos",
+      location: "Juncos, Puerto Rico",
+      type: "Contract Manufacturing",
+      capacity: "Medium Volume",
+      status: "planned",
+      specializations: ["Device assembly", "Packaging", "Quality testing"],
+      qualifications: ["ISO 13485", "FDA 510(k)"]
+    }
+  ];
+
+  const sitesData = manufacturingSites || defaultManufacturingSites;
+
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle className="flex items-center gap-2">
-          <Calendar className="w-5 h-5" />
-          Project Timeline
-        </CardTitle>
-        <CardDescription>
-          Development phases and milestones for {projectName}
-        </CardDescription>
-      </CardHeader>
-      <CardContent>
-        <div className="space-y-6">
-          {timelineData.map((phase, index) => {
+    <div className="space-y-6">
+      <Card>
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2">
+            <Calendar className="w-5 h-5" />
+            Project Timeline
+          </CardTitle>
+          <CardDescription>
+            Development phases and milestones for {projectName}
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="space-y-6">
+            {timelineData.map((phase, index) => {
             const progress = getPhaseProgress(phase);
             
             return (
@@ -233,9 +282,87 @@ export function ProjectTimeline({ timeline, projectName }: ProjectTimelineProps)
                 </div>
               </div>
             );
-          })}
-        </div>
-      </CardContent>
-    </Card>
+            })}
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Manufacturing Sites */}
+      <Card>
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2">
+            <Factory className="w-5 h-5" />
+            Manufacturing Sites
+          </CardTitle>
+          <CardDescription>
+            Production facilities and capabilities for {projectName}
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="grid gap-4">
+            {sitesData.map((site) => (
+              <div key={site.id} className="border border-gray-200 dark:border-gray-700 rounded-lg p-4">
+                <div className="flex items-start justify-between gap-4">
+                  <div className="flex-1">
+                    <div className="flex items-center gap-2 mb-2">
+                      <Factory className="h-4 w-4 text-gray-500" />
+                      <h4 className="font-semibold">{site.name}</h4>
+                      <Badge 
+                        variant={site.status === "active" ? "default" : 
+                                site.status === "planned" ? "secondary" : "outline"}
+                        className="text-xs"
+                      >
+                        {site.status.charAt(0).toUpperCase() + site.status.slice(1)}
+                      </Badge>
+                    </div>
+                    
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-3">
+                      <div className="flex items-center gap-1 text-sm text-gray-600 dark:text-gray-400">
+                        <MapPin className="h-3 w-3" />
+                        {site.location}
+                      </div>
+                      <div className="text-sm">
+                        <span className="text-gray-600 dark:text-gray-400">Type: </span>
+                        {site.type}
+                      </div>
+                      <div className="text-sm">
+                        <span className="text-gray-600 dark:text-gray-400">Capacity: </span>
+                        {site.capacity}
+                      </div>
+                    </div>
+
+                    <div className="space-y-2">
+                      <div>
+                        <span className="text-sm font-medium text-gray-600 dark:text-gray-400">Specializations: </span>
+                        <div className="flex flex-wrap gap-1 mt-1">
+                          {site.specializations.map((spec, idx) => (
+                            <Badge key={idx} variant="outline" className="text-xs">
+                              {spec}
+                            </Badge>
+                          ))}
+                        </div>
+                      </div>
+                      
+                      {site.qualifications && site.qualifications.length > 0 && (
+                        <div>
+                          <span className="text-sm font-medium text-gray-600 dark:text-gray-400">Certifications: </span>
+                          <div className="flex flex-wrap gap-1 mt-1">
+                            {site.qualifications.map((qual, idx) => (
+                              <Badge key={idx} variant="secondary" className="text-xs">
+                                {qual}
+                              </Badge>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </CardContent>
+      </Card>
+    </div>
   );
 }

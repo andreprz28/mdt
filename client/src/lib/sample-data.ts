@@ -54,6 +54,183 @@ export async function loadSampleData(storage: IStorage) {
           milestones: ["Pre-submission meeting", "510(k) submission", "FDA response"],
           deliverables: ["510(k) application", "Clinical data package", "FDA approval letter"]
         }
+      ],
+      manufacturingSites: [
+        {
+          id: "fridley_main",
+          name: "Fridley Manufacturing Center",
+          location: "Fridley, MN",
+          role: "Primary Production",
+          capacity: "500,000 units/year",
+          certifications: ["ISO 13485", "FDA 21 CFR Part 820", "CE Mark"],
+          capabilities: ["Sensor Assembly", "Electronics Integration", "Final Testing"]
+        },
+        {
+          id: "dublin_assembly",
+          name: "Dublin Assembly Facility",
+          location: "Dublin, Ireland",
+          role: "Secondary Assembly",
+          capacity: "200,000 units/year",
+          certifications: ["ISO 13485", "CE Mark", "Health Canada"],
+          capabilities: ["Component Assembly", "Quality Testing", "Packaging"]
+        }
+      ],
+      billOfMaterials: [
+        {
+          partNumber: "MDT-CGM-001",
+          description: "Glucose Sensor Assembly",
+          quantity: 1,
+          unitCost: 85.50,
+          supplier: "Medtronic Internal",
+          leadTime: "2 weeks",
+          criticality: "High"
+        },
+        {
+          partNumber: "MDT-CGM-002",
+          description: "Wireless Transmitter Module",
+          quantity: 1,
+          unitCost: 125.00,
+          supplier: "TI Electronics",
+          leadTime: "4 weeks",
+          criticality: "High"
+        },
+        {
+          partNumber: "MDT-CGM-003",
+          description: "Biocompatible Adhesive Patch",
+          quantity: 1,
+          unitCost: 12.75,
+          supplier: "3M Medical",
+          leadTime: "1 week",
+          criticality: "Medium"
+        },
+        {
+          partNumber: "MDT-CGM-004",
+          description: "Battery Pack (Li-ion)",
+          quantity: 1,
+          unitCost: 28.50,
+          supplier: "Panasonic Medical",
+          leadTime: "3 weeks",
+          criticality: "High"
+        }
+      ],
+      parts: [
+        {
+          partNumber: "MDT-CGM-001",
+          name: "Glucose Sensor Assembly",
+          category: "Sensor",
+          material: "Biocompatible Polymer",
+          dimensions: "5mm x 0.4mm x 12mm",
+          weight: "0.8g",
+          sterilization: "ETO",
+          shelfLife: "24 months"
+        },
+        {
+          partNumber: "MDT-CGM-002",
+          name: "Wireless Transmitter Module",
+          category: "Electronics",
+          material: "Medical Grade Plastic",
+          dimensions: "25mm x 15mm x 8mm",
+          weight: "5.2g",
+          sterilization: "Gamma",
+          shelfLife: "36 months"
+        }
+      ],
+      drawings: [
+        {
+          drawingNumber: "DWG-CGM-001-R3",
+          title: "Sensor Assembly - Mechanical Layout",
+          type: "Assembly Drawing",
+          revision: "R3",
+          date: "2024-03-15",
+          engineer: "Sarah Johnson",
+          format: "PDF",
+          pages: 4
+        },
+        {
+          drawingNumber: "DWG-CGM-002-R2",
+          title: "Transmitter Electronics Schematic",
+          type: "Electrical Schematic",
+          revision: "R2",
+          date: "2024-02-28",
+          engineer: "Michael Rodriguez",
+          format: "PDF",
+          pages: 8
+        },
+        {
+          drawingNumber: "DWG-CGM-003-R1",
+          title: "System Block Diagram",
+          type: "System Diagram",
+          revision: "R1",
+          date: "2024-01-20",
+          engineer: "Dr. Emily Chen",
+          format: "VSDX",
+          pages: 2
+        }
+      ],
+      mockDocuments: [
+        {
+          id: "DOC-001",
+          name: "Design Control Plan v3.2",
+          type: "Design Document",
+          version: "3.2",
+          size: "2.4 MB",
+          uploadedBy: "Sarah Johnson",
+          uploadedAt: "2024-07-08",
+          status: "Current"
+        },
+        {
+          id: "DOC-002",
+          name: "Risk Management File",
+          type: "Risk Assessment",
+          version: "2.1",
+          size: "5.8 MB",
+          uploadedBy: "Dr. Emily Chen",
+          uploadedAt: "2024-07-05",
+          status: "Current"
+        },
+        {
+          id: "DOC-003",
+          name: "Clinical Evaluation Report",
+          type: "Clinical Document",
+          version: "1.5",
+          size: "12.3 MB",
+          uploadedBy: "Michael Rodriguez",
+          uploadedAt: "2024-07-01",
+          status: "Under Review"
+        },
+        {
+          id: "DOC-004",
+          name: "Software Requirements Specification",
+          type: "Technical Specification",
+          version: "4.0",
+          size: "3.7 MB",
+          uploadedBy: "Sarah Johnson",
+          uploadedAt: "2024-06-28",
+          status: "Current"
+        }
+      ],
+      revisions: [
+        {
+          version: "3.2",
+          date: "2024-07-08",
+          author: "Sarah Johnson",
+          changes: "Updated sensor calibration algorithms",
+          reviewStatus: "Approved"
+        },
+        {
+          version: "3.1",
+          date: "2024-06-15",
+          author: "Michael Rodriguez",
+          changes: "Improved wireless transmission protocol",
+          reviewStatus: "Approved"
+        },
+        {
+          version: "3.0",
+          date: "2024-05-20",
+          author: "Dr. Emily Chen",
+          changes: "Major update: Added predictive analytics",
+          reviewStatus: "Approved"
+        }
       ]
     },
     {
@@ -209,6 +386,192 @@ export async function loadSampleData(storage: IStorage) {
           status: "planned" as const,
           milestones: ["Clinical protocol", "Surgeon training", "Outcome analysis"],
           deliverables: ["Clinical data", "Training materials", "Outcome reports"]
+        }
+      ],
+      manufacturingSites: [
+        {
+          id: "boulder_robotics",
+          name: "Boulder Robotics Center",
+          location: "Boulder, CO",
+          role: "Primary Manufacturing",
+          capacity: "500 systems/year",
+          certifications: ["ISO 13485", "FDA 510(k)", "CE Mark", "ISO 14971"],
+          capabilities: ["Robotic Assembly", "Software Integration", "System Testing", "Training Facility"]
+        },
+        {
+          id: "minneapolis_components",
+          name: "Minneapolis Components Plant",
+          location: "Minneapolis, MN",
+          role: "Component Manufacturing",
+          capacity: "10,000 components/month",
+          certifications: ["ISO 13485", "AS9100", "ISO 9001"],
+          capabilities: ["Precision Machining", "Electronics Assembly", "Quality Testing"]
+        },
+        {
+          id: "cork_eu_hub",
+          name: "Cork European Hub",
+          location: "Cork, Ireland",
+          role: "European Distribution",
+          capacity: "200 systems/year",
+          certifications: ["CE Mark", "ISO 13485", "MHRA"],
+          capabilities: ["Final Assembly", "Testing", "Training", "Service Support"]
+        }
+      ],
+      billOfMaterials: [
+        {
+          partNumber: "HUGO-ARM-001",
+          description: "Robotic Arm Assembly - Main",
+          quantity: 4,
+          unitCost: 12500.00,
+          supplier: "Medtronic Robotics",
+          leadTime: "8 weeks",
+          criticality: "Critical"
+        },
+        {
+          partNumber: "HUGO-VIS-001",
+          description: "4K Vision System with 3D Imaging",
+          quantity: 1,
+          unitCost: 8500.00,
+          supplier: "Olympus Medical",
+          leadTime: "6 weeks",
+          criticality: "Critical"
+        },
+        {
+          partNumber: "HUGO-CPU-001",
+          description: "High-Performance Computing Unit",
+          quantity: 1,
+          unitCost: 4200.00,
+          supplier: "Intel Medical",
+          leadTime: "4 weeks",
+          criticality: "High"
+        },
+        {
+          partNumber: "HUGO-HAP-001",
+          description: "Haptic Feedback Controller",
+          quantity: 2,
+          unitCost: 3200.00,
+          supplier: "Force Dimension",
+          leadTime: "5 weeks",
+          criticality: "High"
+        }
+      ],
+      parts: [
+        {
+          partNumber: "HUGO-ARM-001",
+          name: "Robotic Arm Assembly",
+          category: "Mechanical",
+          material: "Medical Grade Titanium Alloy",
+          dimensions: "800mm x 150mm x 120mm",
+          weight: "8.5kg",
+          sterilization: "Steam Autoclave",
+          shelfLife: "10 years"
+        },
+        {
+          partNumber: "HUGO-VIS-001",
+          name: "4K Vision System",
+          category: "Optical",
+          material: "Medical Grade Aluminum",
+          dimensions: "200mm x 150mm x 80mm",
+          weight: "2.1kg",
+          sterilization: "ETO",
+          shelfLife: "5 years"
+        }
+      ],
+      drawings: [
+        {
+          drawingNumber: "DWG-HUGO-001-R5",
+          title: "System Architecture Overview",
+          type: "System Drawing",
+          revision: "R5",
+          date: "2024-06-20",
+          engineer: "Dr. Amanda Rodriguez",
+          format: "PDF",
+          pages: 12
+        },
+        {
+          drawingNumber: "DWG-HUGO-002-R3",
+          title: "Robotic Arm Mechanical Assembly",
+          type: "Mechanical Drawing",
+          revision: "R3",
+          date: "2024-06-15",
+          engineer: "Kevin Chang",
+          format: "STEP",
+          pages: 8
+        },
+        {
+          drawingNumber: "DWG-HUGO-003-R2",
+          title: "Software Architecture Diagram",
+          type: "Software Design",
+          revision: "R2",
+          date: "2024-06-10",
+          engineer: "Rachel Green",
+          format: "VSDX",
+          pages: 6
+        }
+      ],
+      mockDocuments: [
+        {
+          id: "HUGO-DOC-001",
+          name: "System Design Specification",
+          type: "Design Document",
+          version: "4.1",
+          size: "15.2 MB",
+          uploadedBy: "Dr. Amanda Rodriguez",
+          uploadedAt: "2024-07-09",
+          status: "Current"
+        },
+        {
+          id: "HUGO-DOC-002",
+          name: "Software Validation Protocol",
+          type: "Validation Document",
+          version: "2.3",
+          size: "8.7 MB",
+          uploadedBy: "Rachel Green",
+          uploadedAt: "2024-07-08",
+          status: "Current"
+        },
+        {
+          id: "HUGO-DOC-003",
+          name: "Surgeon Training Manual",
+          type: "Training Document",
+          version: "1.8",
+          size: "22.1 MB",
+          uploadedBy: "Kevin Chang",
+          uploadedAt: "2024-07-05",
+          status: "Under Review"
+        },
+        {
+          id: "HUGO-DOC-004",
+          name: "Safety Risk Assessment",
+          type: "Safety Document",
+          version: "3.0",
+          size: "6.4 MB",
+          uploadedBy: "Dr. Amanda Rodriguez",
+          uploadedAt: "2024-07-02",
+          status: "Current"
+        }
+      ],
+      revisions: [
+        {
+          version: "4.1",
+          date: "2024-07-09",
+          author: "Dr. Amanda Rodriguez",
+          changes: "Enhanced haptic feedback calibration procedures",
+          reviewStatus: "Approved"
+        },
+        {
+          version: "4.0",
+          date: "2024-06-25",
+          author: "Rachel Green",
+          changes: "Major software update: AI-powered surgical guidance",
+          reviewStatus: "Approved"
+        },
+        {
+          version: "3.9",
+          date: "2024-06-10",
+          author: "Kevin Chang",
+          changes: "Improved arm joint precision and safety mechanisms",
+          reviewStatus: "Approved"
         }
       ]
     },
