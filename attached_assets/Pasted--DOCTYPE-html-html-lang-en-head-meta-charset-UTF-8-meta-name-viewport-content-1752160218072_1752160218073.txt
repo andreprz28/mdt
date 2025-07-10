@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medtronic Project Intelligence Platform</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        medtronic: '#0066CC',
+                        'medtronic-light': '#4285F4',
+                        'medtronic-dark': '#004080',
+                        'bg-light': '#FFFFFF',
+                        'bg-dark': '#181818'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .search-highlight {
+            background-color: #FEF3C7;
+            font-weight: 600;
+        }
+        .dark .search-highlight {
+            background-color: #92400E;
+            color: #FEF3C7;
+        }
+        .enterprise-card {
+            transition: all 0.3s ease;
+            border-left: 4px solid transparent;
+        }
+        .enterprise-card:hover {
+            border-left-color: #0066CC;
+            transform: translateY(-2px);
+        }
+        .ai-thinking {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        .status-active { @apply bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200; }
+        .status-planning { @apply bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200; }
+        .status-on-hold { @apply bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200; }
+        .status-completed { @apply bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-200; }
+        .status-delayed { @apply bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200; }
+    </style>
+</head>
+<body class="bg-bg-light dark:bg-bg-dark text-gray-900 dark:text-gray-100 min-h-screen transition-colors">
+    <!-- Header -->
+    <header class="bg-white dark:bg-gray-800 shadow-sm border-b border-gray-200 dark:border-gray-700">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-medtronic rounded-lg flex items-center justify-center">
+                        <span class="text-white font-bold text-lg">M</span>
+                    </div>
+                    <div>
+                        <h1 class="text-xl font-bold text-gray-900 dark:text-white">Project Intelligence Platform</h1>
+                        <p class="text-sm text-gray-600 dark:text-gray-400">Medtronic Internal Tool</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-4">
+                    <button id="dataUploadBtn" class="bg-medtronic text-white px-4 py-2 rounded-lg hover:bg-medtronic-dark transition-colors text-sm">
+                        Upload Data
+                    </button>
+                    <button id="loadSampleBtn" class="bg-gray-600 text-white px-4 py-2 rounded-lg hover:bg-gray-700 transition-colors text-sm">
+                        Load Sample Data
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        <!-- Search Interface -->
+        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 mb-6">
+            <div class="flex flex-col lg:flex-row gap-6">
+                <!-- Search Input -->
+                <div class="flex-1">
+                    <div class="relative">
+                        <input type="text" id="globalSearch" 
+                               class="w-full pl-12 pr-4 py-4 text-lg border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 focus:ring-2 focus:ring-medtronic focus:border-transparent" 
+                               placeholder="Search projects, people, or ask AI questions...">
+                        <div class="absolute left-4 top-1/2 transform -translate-y-1/2">
+                            <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="mt-2 flex flex-wrap gap-2">
+                        <button class="search-suggestion text-sm bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 px-3 py-1 rounded-full hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors">
+                            Who's working on diabetes pump projects?
+                        </button>
+                        <button class="search-suggestion text-sm bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 px-3 py-1 rounded-full hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors">
+                            Show all cardiac projects in Minneapolis
+                        </button>
+                        <button class="search-suggestion text-sm bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 px-3 py-1 rounded-full hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors">
+                            Projects delayed this quarter
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Filters -->
+                <div class="lg:w-80 space-y-3">
+                    <div class="grid grid-cols-2 gap-3">
+                        <select id="functionFilter" class="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-base">
+                            <option value="">All Functions</option>
+                            <option value="R&D">R&D</option>
+                            <option value="Clinical">Clinical</option>
+                            <option value="Regulatory">Regulatory</option>
+                            <option value="Manufacturing">Manufacturing</option>
+                            <option value="Quality">Quality</option>
+                            <option value="Marketing">Marketing</option>
+                        </select>
+                        <select id="locationFilter" class="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-base">
+                            <option value="">All Locations</option>
+                            <option value="Minneapolis">Minneapolis</option>
+                            <option value="Fridley">Fridley</option>
+                            <option value="Santa Rosa">Santa Rosa</option>
+                            <option value="Dublin">Dublin</option>
+                            <option value="Shanghai">Shanghai</option>
+                            <option value="Remote">Remote</option>
+                        </select>
+                    </div>
+                    <div class="grid grid-cols-2 gap-3">
+                        <select id="statusFilter" class="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-base">
+                            <option value="">All Status</option>
+                            <option value="Active">Active</option>
+                            <option value="Planning">Planning</option>
+                            <option value="On Hold">On Hold</option>
+                            <option value="Completed">Completed</option>
+                            <option value="Delayed">Delayed</option>
+                        </select>
+                        <select id="categoryFilter" class="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-base">
+                            <option value="">All Categories</option>
+                            <option value="Diabetes">Diabetes</option>
+                            <option value="Cardiac">Cardiac</option>
+                            <option value="Surgical">Surgical</option>
+                            <option value="Neuromodulation">Neuromodulation</option>
+                            <option value="Digital Health">Digital Health</option>
+                        </select>
+                    </div>
+                    <button id="clearFilters" class="w-full bg-gray-500 text-white py-2 rounded-lg hover:bg-gray-600 transition-colors text-sm">
+                        Clear Filters
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- AI Assistant Panel -->
+        <div id="aiPanel" class="bg-white dark:bg-gray-800 rounded-lg shadow-md mb-6 hidden">
+            <div class="p-4 border-b border-gray-200 dark:border-gray-700">
+                <div class="flex items-center justify-between">
+                    <h3 class="text-lg font-semibold">AI Assistant Response</h3>
+                    <button id="closeAI" class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <div id="aiResponse" class="p-6">
+                <!-- AI responses will be inserted here -->
+            </div>
+        </div>
+
+        <!-- Search Results -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <!-- Projects Results -->
+            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md">
+                <div class="p-6 border-b border-gray-200 dark:border-gray-700">
+                    <h2 class="text-xl font-semibold">Projects</h2>
+                    <p id="projectCount" class="text-sm text-gray-600 dark:text-gray-400 mt-1">0 projects found</p>
+                </div>
+                <div id="projectResults" class="p-6 max-h-96 overflow-y-auto">
+                    <div class="text-center text-gray-500 dark:text-gray-400 py-8">
+                        Enter a search term or load sample data to begin
+                    </div>
+                </div>
+            </div>
+
+            <!-- People Results -->
+            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md">
+                <div class="p-6 border-b border-gray-200 dark:border-gray-700">
+                    <h2 class="text-xl font-semibold">People</h2>
+                    <p id="peopleCount" class="text-sm text-gray-600 dark:text-gray-400 mt-1">0 people found</p>
+                </div>
+                <div id="peopleResults" class="p-6 max-h-96 overflow-y-auto">
+                    <div class="text-center text-gray-500 dark:text-gray-400 py-8">
+                        Enter a search term or load sample data to begin
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Data Upload Modal -->
+    <div id="uploadModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg max-w-md w-full mx-4">
+            <h3 class="text-lg font-semibold mb-4">Upload Project Data</h3>
+            <div class="mb-4">
+                <label class="block text-sm font-medium mb-2">CSV/Excel File</label>
+                <input type="file" id="dataFile" accept=".csv,.xlsx,.xls" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-base">
+                <p class="text-sm text-gray-500 dark:text-gray-400 mt-2">
+                    Expected columns: project_name, description, status, category, function, location, people, roles, skills, deadline, progress
+                </p>
+            </div>
+            <div class="flex justify-end space-x-3">
+                <button id="cancelUpload" class="px-4 py-2 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 rounded transition-colors">Cancel</button>
+                <button id="confirmUpload" class="px-4 py-2 bg-medtronic text-white hover:bg-medtronic-dark rounded transition-colors">Upload</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Dark mode detection
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            document.documentElement.classList.add('dark');
+        }
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
+            if (event.matches) {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
+        });
+
+        // Data Management
+        let projectData = [];
+        let peopleData = [];
+        let allData = [];
+
+        // Sample Medtronic data
+        const sampleData = `project_name,description,status,category,function,location,people,roles,skills,deadline,progress,milestones
+MiniMed 780G Enhancement,Next-gen insulin pump with advanced glucose monitoring and automated insulin delivery,Active,Diabetes,R&D,Fridley,"Sarah Chen;Michael Rodriguez;Dr. Emily Johnson","Project Manager;Lead Engineer;Clinical Specialist","Embedded Systems;Regulatory;Clinical Research",2024-08-15,75,"FDA Submission Q2;Clinical Trial Q3;Launch Q4"
+Micra AV Leadless Pacemaker,Ultra-miniaturized dual-chamber pacemaker with atrioventricular synchrony,Active,Cardiac,R&D,Minneapolis,"David Kim;Lisa Wang;Alex Thompson","Senior Engineer;Regulatory Manager;Clinical Director","Cardiac Devices;FDA Compliance;Electrophysiology",2024-06-30,60,"Design Freeze Q1;Animal Studies Q2;First Human Implant Q3"
+StealthStation S8 Surgical Navigation,Advanced surgical navigation system with AI-powered imaging,Planning,Surgical,R&D,Santa Rosa,"Jordan Lee;Taylor Brown;Morgan Davis","Software Lead;Hardware Engineer;Clinical Specialist","Machine Learning;Medical Imaging;Neurosurgery",2024-12-01,25,"Prototype Q2;Clinical Validation Q3;Regulatory Review Q4"
+Intellis DBS Deep Brain Stimulation,Next-generation neurostimulator for Parkinson's and essential tremor,Active,Neuromodulation,R&D,Minneapolis,"Casey Wilson;Riley Martinez;Avery Thompson","Principal Engineer;Clinical Manager;Regulatory Specialist","Neurostimulation;Clinical Trials;FDA Submission",2024-09-30,80,"IDE Approval Complete;Pivotal Trial Ongoing;PMA Prep Q3"
+diabetes.net Patient Portal,Comprehensive digital platform for diabetes management and remote monitoring,Active,Digital Health,R&D,Remote,"Quinn Johnson;Sam Rodriguez;Tyler Chen","Digital Product Manager;Full Stack Developer;UX Designer","Mobile Development;Cloud Architecture;Patient Experience",2024-07-15,45,"Beta Launch Q2;Security Audit Q3;Commercial Launch Q4"
+Valiant Thoracic Stent Graft,Next-generation endovascular stent graft for thoracic aortic repair,Completed,Cardiac,Manufacturing,Dublin,"Morgan Lee;Casey Davis;Riley Kim","Manufacturing Engineer;Quality Manager;Supply Chain Lead","Medical Device Manufacturing;Quality Systems;Supply Chain",2024-03-31,100,"FDA Approval Complete;CE Mark Obtained;Commercial Launch Complete"
+Hugo Robotic Surgery Platform,AI-powered robotic surgical platform with haptic feedback,Active,Surgical,R&D,Santa Rosa,"Avery Rodriguez;Quinn Wilson;Sam Thompson","Robotics Engineer;AI Specialist;Clinical Affairs","Robotics;Computer Vision;Surgical Training",2025-02-28,35,"Prototype Development;Clinical Studies Planning;Regulatory Strategy"
+Continuous Glucose Monitor Gen 5,Ultra-thin 14-day wear CGM with smartphone integration,Active,Diabetes,R&D,Fridley,"Tyler Martinez;Casey Johnson;Morgan Chen","Sensor Engineer;Software Developer;Clinical Researcher","Biosensors;Mobile Apps;Clinical Validation",2024-10-31,55,"Sensor Optimization Q2;App Development Q3;Clinical Trial Q4"`;
+
+        // Parse CSV data
+        function parseCSV(csvText) {
+            const lines = csvText.trim().split('\n');
+            const headers = lines[0].split(',');
+            
+            return lines.slice(1).map(line => {
+                const values = [];
+                let current = '';
+                let inQuotes = false;
+                
+                for (let i = 0; i < line.length; i++) {
+                    const char = line[i];
+                    if (char === '"') {
+                        inQuotes = !inQuotes;
+                    } else if (char === ',' && !inQuotes) {
+                        values.push(current.trim());
+                        current = '';
+                    } else {
+                        current += char;
+                    }
+                }
+                values.push(current.trim());
+
+                const obj = {};
+                headers.forEach((header, index) => {
+                    obj[header.trim()] = values[index] || '';
+                });
+                return obj;
+            });
+        }
+
+        // Load sample data
+        function loadSampleData() {
+            const rawData = parseCSV(sampleData);
+            processData(rawData);
+            showNotification('Sample Medtronic project data loaded successfully!');
+        }
+
+        // Process data into projects and people
+        function processData(rawData) {
+            allData = rawData;
+            projectData = [];
+            peopleData = [];
+
+            rawData.forEach(row => {
+                // Create project entry
+                const project = {
+                    id: `proj_${projectData.length + 1}`,
+                    name: row.project_name,
+                    description: row.description,
+                    status: row.status,
+                    category: row.category,
+                    function: row.function,
+                    location: row.location,
+                    deadline: row.deadline,
+                    progress: parseInt(row.progress) || 0,
+                    milestones: row.milestones ? row.milestones.split(';') : [],
+                    people: row.people ? row.people.split(';') : [],
+                    roles: row.roles ? row.roles.split(';') : [],
+                    skills: row.skills ? row.skills.split(';') : []
+                };
+                projectData.push(project);
+
+                // Create people entries
+                if (row.people && row.roles) {
+                    const people = row.people.split(';');
+                    const roles = row.roles.split(';');
+                    const skills = row.skills ? row.skills.split(';') : [];
+
+                    people.forEach((person, index) => {
+                        person = person.trim();
+                        if (!person) return;
+
+                        let existingPerson = peopleData.find(p => p.name === person);
+                        
+                        if (!existingPerson) {
+                            existingPerson = {
+                                id: `person_${peopleData.length + 1}`,
+                                name: person,
+                                function: row.function,
+                                location: row.location,
+                                projects: [],
+                                skills: new Set()
+                            };
+                            peopleData.push(existingPerson);
+                        }
+
+                        existingPerson.projects.push({
+                            projectName: row.project_name,
+                            projectId: project.id,
+                            role: roles[index] || roles[0] || 'Team Member',
+                            status: row.status,
+                            category: row.category
+                        });
+
+                        // Add skills
+                        skills.forEach(skill => {
+                            if (skill.trim()) {
+                                existingPerson.skills.add(skill.trim());
+                            }
+                        });
+                    });
+                }
+            });
+
+            // Convert skills sets to arrays
+            peopleData.forEach(person => {
+                person.skills = Array.from(person.skills);
+            });
+
+            performSearch(''); // Initial display
+        }
+
+        // Search functionality
+        function performSearch(query = '') {
+            query = query.toLowerCase().trim();
+            
+            // Apply filters
+            const functionFilter = document.getElementById('functionFilter').value;
+            const locationFilter = document.getElementById('locationFilter').value;
+            const statusFilter = document.getElementById('statusFilter').value;
+            const categoryFilter = document.getElementById('categoryFilter').value;
+
+            // Check if this looks like an AI query
+            if (isAIQuery(query)) {
+                handleAIQuery(query);
+                return;
+            }
+
+            // Filter projects
+            let filteredProjects = projectData.filter(project => {
+                // Apply filters
+                if (functionFilter && project.function !== functionFilter) return false;
+                if (locationFilter && project.location !== locationFilter) return false;
+                if (statusFilter && project.status !== statusFilter) return false;
+                if (categoryFilter && project.category !== categoryFilter) return false;
+
+                // Apply search query
+                if (query) {
+                    const searchableText = [
+                        project.name, project.description, project.category,
+                        project.function, project.location, project.status,
+                        ...project.people, ...project.roles, ...project.skills
+                    ].join(' ').toLowerCase();
+                    
+                    return searchableText.includes(query);
+                }
+                return true;
+            });
+
+            // Filter people
+            let filteredPeople = peopleData.filter(person => {
+                // Apply filters
+                if (functionFilter && person.function !== functionFilter) return false;
+                if (locationFilter && person.location !== locationFilter) return false;
+
+                // Apply search query
+                if (query) {
+                    const searchableText = [
+                        person.name, person.function, person.location,
+                        ...person.skills,
+                        ...person.projects.map(p => `${p.projectName} ${p.role}`)
+                    ].join(' ').toLowerCase();
+                    
+                    return searchableText.includes(query);
+                }
+                return true;
+            });
+
+            displayResults(filteredProjects, filteredPeople, query);
+        }
+
+        // Check if query is for AI
+        function isAIQuery(query) {
+            const aiIndicators = [
+                'who', 'what', 'where', 'when', 'why', 'how',
+                'recommend', 'suggest', 'analyze', 'summarize',
+                'find people', 'show me', 'tell me'
+            ];
+            return aiIndicators.some(indicator => query.includes(indicator));
+        }
+
+        // Handle AI queries
+        async function handleAIQuery(query) {
+            document.getElementById('aiPanel').classList.remove('hidden');
+            const responseDiv = document.getElementById('aiResponse');
+            
+            responseDiv.innerHTML = `
+                <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 bg-medtronic rounded-full flex items-center justify-center">
+                        <span class="text-white text-sm font-bold">AI</span>
+                    </div>
+                    <div class="ai-thinking text-gray-600 dark:text-gray-400">
+                        Analyzing Medtronic project data...
+                    </div>
+                </div>
+            `;
+
+            try {
+                window.Poe.registerHandler("medtronic-ai-handler", (result) => {
+                    const msg = result.responses[0];
+                    if (msg.status === "error") {
+                        responseDiv.innerHTML = `
+                            <div class="flex items-start gap-3">
+                                <div class="w-8 h-8 bg-medtronic rounded-full flex items-center justify-center">
+                                    <span class="text-white text-sm font-bold">AI</span>
+                                </div>
+                                <div class="flex-1 text-red-600 dark:text-red-400">
+                                    Error: ${msg.statusText}
+                                </div>
+                            </div>
+                        `;
+                    } else if (msg.status === "incomplete") {
+                        responseDiv.innerHTML = `
+                            <div class="flex items-start gap-3">
+                                <div class="w-8 h-8 bg-medtronic rounded-full flex items-center justify-center">
+                                    <span class="text-white text-sm font-bold">AI</span>
+                                </div>
+                                <div class="flex-1 text-gray-700 dark:text-gray-300">
+                                    ${formatAIResponse(msg.content)}
+                                </div>
+                            </div>
+                        `;
+                    } else if (msg.status === "complete") {
+                        responseDiv.innerHTML = `
+                            <div class="flex items-start gap-3">
+                                <div class="w-8 h-8 bg-medtronic rounded-full flex items-center justify-center">
+                                    <span class="text-white text-sm font-bold">AI</span>
+                                </div>
+                                <div class="flex-1 text-gray-700 dark:text-gray-300">
+                                    ${formatAIResponse(msg.content)}
+                                </div>
+                            </div>
+                        `;
+                    }
+                });
+
+                // Create context about projects and people
+                const projectContext = projectData.slice(0, 10).map(p => 
+                    `${p.name}: ${p.status}, ${p.category}, ${p.location}, People: ${p.people.join(', ')}`
+                ).join('\n');
+
+                const peopleContext = peopleData.slice(0, 10).map(p => 
+                    `${p.name}: ${p.function}, ${p.location}, Skills: ${p.skills.join(', ')}, Projects: ${p.projects.map(pr => pr.projectName).join(', ')}`
+                ).join('\n');
+
+                await window.Poe.sendUserMessage(
+                    `@Claude-Sonnet-4 You are an AI assistant for Medtronic's Project Intelligence Platform. Help with questions about medical device projects, people, and collaboration. 
+
+Context - Current Medtronic Projects:
+${projectContext}
+
+Context - Medtronic Team Members:
+${peopleContext}
+
+User Question: ${query}
+
+Please provide specific, actionable answers based on the Medtronic project data. Focus on medical device development, regulatory timelines, and team collaboration.`,
+                    {
+                        handler: "medtronic-ai-handler",
+                        stream: true,
+                        openChat: false
+                    }
+                );
+            } catch (err) {
+                responseDiv.innerHTML = `
+                    <div class="flex items-start gap-3">
+                        <div class="w-8 h-8 bg-medtronic rounded-full flex items-center justify-center">
+                            <span class="text-white text-sm font-bold">AI</span>
+                        </div>
+                        <div class="flex-1 text-red-600 dark:text-red-400">
+                            Error connecting to AI assistant: ${err.message}
+                        </div>
+                    </div>
+                `;
+            }
+        }
+
+        // Format AI response
+        function formatAIResponse(content) {
+            return content
+                .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                .replace(/\n/g, '<br>')
+                .replace(/• /g, '• ');
+        }
+
+        // Display search results
+        function displayResults(projects, people, query) {
+            displayProjects(projects, query);
+            displayPeople(people, query);
+        }
+
+        // Display projects
+        function displayProjects(projects, query) {
+            const container = document.getElementById('projectResults');
+            const countElement = document.getElementById('projectCount');
+            
+            countElement.textContent = `${projects.length} project${projects.length !== 1 ? 's' : ''} found`;
+
+            if (projects.length === 0) {
+                container.innerHTML = '<div class="text-center text-gray-500 dark:text-gray-400 py-8">No projects match your search criteria</div>';
+                return;
+            }
+
+            const projectsHTML = projects.map(project => {
+                const progressColor = project.progress >= 80 ? 'bg-green-500' : 
+                                    project.progress >= 50 ? 'bg-blue-500' : 
+                                    project.progress >= 25 ? 'bg-yellow-500' : 'bg-red-500';
+
+                const statusClass = `status-${project.status.toLowerCase().replace(/\s+/g, '-')}`;
+
+                return `
+                    <div class="enterprise-card border border-gray-200 dark:border-gray-700 rounded-lg p-4 mb-4 hover:shadow-lg">
+                        <div class="flex items-start justify-between mb-3">
+                            <div class="flex-1">
+                                <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-1">
+                                    ${highlightText(project.name, query)}
+                                </h3>
+                                <div class="flex flex-wrap gap-2 mb-2">
+                                    <span class="px-2 py-1 text-xs font-medium rounded-full ${statusClass}">
+                                        ${project.status}
+                                    </span>
+                                    <span class="px-2 py-1 text-xs font-medium rounded-full bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200">
+                                        ${project.category}
+                                    </span>
+                                    <span class="px-2 py-1 text-xs font-medium rounded-full bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200">
+                                        ${project.function}
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <div class="text-sm font-medium text-gray-900 dark:text-white">${project.progress}%</div>
+                                <div class="w-16 bg-gray-200 dark:bg-gray-700 rounded-full h-2 mt-1">
+                                    <div class="${progressColor} h-2 rounded-full" style="width: ${project.progress}%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <p class="text-sm text-gray-600 dark:text-gray-400 mb-3">
+                            ${highlightText(project.description, query)}
+                        </p>
+                        
+                        <div class="grid grid-cols-2 gap-4 text-sm mb-3">
+                            <div>
+                                <strong class="text-gray-700 dark:text-gray-300">Location:</strong>
+                                <span class="text-gray-600 dark:text-gray-400">${project.location}</span>
+                            </div>
+                            <div>
+                                <strong class="text-gray-700 dark:text-gray-300">Deadline:</strong>
+                                <span class="text-gray-600 dark:text-gray-400">${formatDate(project.deadline)}</span>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <strong class="text-sm text-gray-700 dark:text-gray-300">Team:</strong>
+                            <div class="flex flex-wrap gap-1 mt-1">
+                                ${project.people.map(person => 
+                                    `<span class="px-2 py-1 text-xs bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded">
+                                        ${highlightText(person, query)}
+                                    </span>`
+                                ).join('')}
+                            </div>
+                        </div>
+                        
+                        ${project.milestones.length > 0 ? `
+                            <div>
+                                <strong class="text-sm text-gray-700 dark:text-gray-300">Key Milestones:</strong>
+                                <ul class="mt-1 text-xs text-gray-600 dark:text-gray-400">
+                                    ${project.milestones.map(milestone => 
+                                        `<li>• ${milestone}</li>`
+                                    ).join('')}
+                                </ul>
+                            </div>
+                        ` : ''}
+                    </div>
+                `;
+            }).join('');
+
+            container.innerHTML = projectsHTML;
+        }
+
+        // Display people
+        function displayPeople(people, query) {
+            const container = document.getElementById('peopleResults');
+            const countElement = document.getElementById('peopleCount');
+            
+            countElement.textContent = `${people.length} ${people.length !== 1 ? 'people' : 'person'} found`;
+
+            if (people.length === 0) {
+                container.innerHTML = '<div class="text-center text-gray-500 dark:text-gray-400 py-8">No people match your search criteria</div>';
+                return;
+            }
+
+            const peopleHTML = people.map(person => {
+                const initials = person.name.split(' ').map(n => n[0]).join('').toUpperCase();
+                
+                return `
+                    <div class="enterprise-card border border-gray-200 dark:border-gray-700 rounded-lg p-4 mb-4 hover:shadow-lg">
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-medtronic rounded-full flex items-center justify-center text-white font-bold">
+                                ${initials}
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-1">
+                                    ${highlightText(person.name, query)}
+                                </h3>
+                                <div class="flex flex-wrap gap-2 mb-3">
+                                    <span class="px-2 py-1 text-xs font-medium rounded-full bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200">
+                                        ${person.function}
+                                    </span>
+                                    <span class="px-2 py-1 text-xs font-medium rounded-full bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200">
+                                        ${person.location}
+                                    </span>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <strong class="text-sm text-gray-700 dark:text-gray-300">Skills:</strong>
+                                    <div class="flex flex-wrap gap-1 mt-1">
+                                        ${person.skills.map(skill => 
+                                            `<span class="px-2 py-1 text-xs bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 rounded">
+                                                ${highlightText(skill, query)}
+                                            </span>`
+                                        ).join('')}
+                                    </div>
+                                </div>
+                                
+                                <div>
+                                    <strong class="text-sm text-gray-700 dark:text-gray-300">Projects (${person.projects.length}):</strong>
+                                    <div class="mt-1 space-y-1">
+                                        ${person.projects.slice(0, 3).map(project => 
+                                            `<div class="text-xs text-gray-600 dark:text-gray-400">
+                                                • <strong>${highlightText(project.projectName, query)}</strong> 
+                                                as ${project.role} 
+                                                <span class="px-1 py-0.5 bg-gray-100 dark:bg-gray-700 rounded text-xs">${project.status}</span>
+                                            </div>`
+                                        ).join('')}
+                                        ${person.projects.length > 3 ? 
+                                            `<div class="text-xs text-gray-500 dark:text-gray-400">
+                                                +${person.projects.length - 3} more projects
+                                            </div>` : ''
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            container.innerHTML = peopleHTML;
+        }
+
+        // Highlight search terms
+        function highlightText(text, query) {
+            if (!query || !text) return text;
+            const regex = new RegExp(`(${query})`, 'gi');
+            return text.replace(regex, '<span class="search-highlight">$1</span>');
+        }
+
+        // Format date
+        function formatDate(dateString) {
+            if (!dateString) return 'Not set';
+            return new Date(dateString).toLocaleDateString('en-US', {
+                month: 'short',
+                day: 'numeric',
+                year: 'numeric'
+            });
+        }
+
+        // Show notification
+        function showNotification(message) {
+            const notification = document.createElement('div');
+            notification.className = 'fixed top-4 right-4 bg-medtronic text-white px-6 py-3 rounded-lg shadow-lg z-50';
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.remove();
+            }, 3000);
+        }
+
+        // Event listeners
+        function setupEventListeners() {
+            // Search functionality
+            const searchInput = document.getElementById('globalSearch');
+            searchInput.addEventListener('input', (e) => {
+                performSearch(e.target.value);
+            });
+
+            // Search suggestions
+            document.querySelectorAll('.search-suggestion').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const query = btn.textContent.trim();
+                    searchInput.value = query;
+                    performSearch(query);
+                });
+            });
+
+            // Filters
+            ['functionFilter', 'locationFilter', 'statusFilter', 'categoryFilter'].forEach(filterId => {
+                document.getElementById(filterId).addEventListener('change', () => {
+                    performSearch(searchInput.value);
+                });
+            });
+
+            // Clear filters
+            document.getElementById('clearFilters').addEventListener('click', () => {
+                document.getElementById('functionFilter').value = '';
+                document.getElementById('locationFilter').value = '';
+                document.getElementById('statusFilter').value = '';
+                document.getElementById('categoryFilter').value = '';
+                performSearch(searchInput.value);
+            });
+
+            // Load sample data
+            document.getElementById('loadSampleBtn').addEventListener('click', loadSampleData);
+
+            // Data upload modal
+            document.getElementById('dataUploadBtn').addEventListener('click', () => {
+                document.getElementById('uploadModal').classList.remove('hidden');
+            });
+
+            document.getElementById('cancelUpload').addEventListener('click', () => {
+                document.getElementById('uploadModal').classList.add('hidden');
+            });
+
+            document.getElementById('confirmUpload').addEventListener('click', () => {
+                const fileInput = document.getElementById('dataFile');
+                const file = fileInput.files[0];
+                
+                if (!file) {
+                    showNotification('Please select a file to upload');
+                    return;
+                }
+
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    try {
+                        const rawData = parseCSV(e.target.result);
+                        processData(rawData);
+                        document.getElementById('uploadModal').classList.add('hidden');
+                        showNotification(`Successfully loaded ${rawData.length} records from ${file.name}`);
+                    } catch (error) {
+                        showNotification('Error parsing file. Please check the format.');
+                    }
+                };
+                reader.readAsText(file);
+            });
+
+            // AI Panel close
+            document.getElementById('closeAI').addEventListener('click', () => {
+                document.getElementById('aiPanel').classList.add('hidden');
+            });
+        }
+
+        // Initialize
+        setupEventListeners();
+    </script>
+</body>
+</html>
