@@ -2,7 +2,7 @@
 
 ## Overview
 
-This is a full-stack web application designed for managing project intelligence at Medtronic. The platform provides comprehensive project management capabilities with real-time search, analytics, and AI-powered insights for medical device development projects.
+This is a full-stack web application designed for managing project intelligence at Medtronic. The platform provides comprehensive project management capabilities with real-time search, analytics, and AI-powered insights for medical device development projects. The platform features a real-time "lives saved per minute" counter, comprehensive project and people profiles, document activity tracking, and advanced search capabilities across all Medtronic medical device categories.
 
 ## User Preferences
 
@@ -36,29 +36,43 @@ The application uses a PostgreSQL database with the following main entities:
 
 ## Key Components
 
+### Lives Saved Counter
+- Real-time animated counter showing lives saved per minute
+- Prominent display emphasizing Medtronic's mission impact
+- Smooth animation with Medtronic brand colors
+
 ### Data Models
 - Projects support multiple categories (Diabetes, Cardiac, Surgical, Neuromodulation, Digital Health)
 - Flexible status system (Active, Planning, On Hold, Completed, Delayed)
 - Multi-dimensional project organization by function, location, and stage
-- Rich team member profiles with skills and experience tracking
+- Rich team member profiles with patents, publications, education, and achievements
+- Comprehensive project details including milestones, team roles, and recent activity
 
 ### Search & Filtering
 - Full-text search across projects and people
 - Advanced filtering by category, status, function, location, and stage
 - Real-time search results with highlighted matches
 - AI-powered query interpretation and suggestions
+- Default display of all projects and people without search filters
 
 ### Analytics & Visualization
 - Dashboard with key performance indicators
 - Project distribution charts using Recharts
 - Progress tracking and completion metrics
 - Activity feed with real-time updates
+- Visual project cards with progress bars and status indicators
 
 ### AI Features
 - Intelligent query processing and response generation
 - Context-aware suggestions based on project data
 - Natural language search capabilities
 - Automated insights and recommendations
+
+### Document Management
+- File upload capabilities with document type classification
+- Activity tracking for document uploads and updates
+- Document version control and metadata storage
+- Integration with project activity feeds
 
 ## Data Flow
 
