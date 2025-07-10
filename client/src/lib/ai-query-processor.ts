@@ -39,6 +39,17 @@ export class AIQueryProcessor {
       return this.handleExpertiseQuery(query);
     }
 
+    // Expertise discovery queries
+    if (lowerQuery.includes("expert") || lowerQuery.includes("specialist") || lowerQuery.includes("experienced") ||
+        lowerQuery.includes("battery") || lowerQuery.includes("materials") || lowerQuery.includes("python") ||
+        lowerQuery.includes("automation") || lowerQuery.includes("machine learning") || lowerQuery.includes("ai") ||
+        lowerQuery.includes("cardiac") || lowerQuery.includes("surgical") || lowerQuery.includes("diabetes") ||
+        lowerQuery.includes("regulatory") || lowerQuery.includes("clinical") || lowerQuery.includes("engineering") ||
+        lowerQuery.includes("data science") || lowerQuery.includes("software") || lowerQuery.includes("hardware") ||
+        lowerQuery.includes("quality") || lowerQuery.includes("manufacturing") || lowerQuery.includes("robotics")) {
+      return this.handleExpertiseDiscovery(query);
+    }
+
     // Questions about deadlines
     if (lowerQuery.includes("deadline") || lowerQuery.includes("due date") || lowerQuery.includes("when")) {
       return this.handleDeadlineQuery(query);
@@ -137,6 +148,135 @@ export class AIQueryProcessor {
         "Focus resources on high-impact delayed projects",
         "Consider quarterly business reviews for better tracking"
       ]
+    };
+  }
+
+  private handleExpertiseDiscovery(query: string): AIQueryResponse {
+    const lowerQuery = query.toLowerCase();
+    let relevantPeople: Person[] = [];
+    let answer = "";
+    let expertiseArea = "";
+
+    // Advanced expertise matching
+    const expertiseKeywords = {
+      "battery": ["battery", "energy storage", "power management", "lithium"],
+      "materials": ["materials", "biocompatible", "polymer", "ceramic", "metal"],
+      "python": ["python", "automation", "scripting", "data analysis"],
+      "automation": ["automation", "robotics", "manufacturing", "process"],
+      "machine learning": ["machine learning", "ai", "data science", "algorithms"],
+      "cardiac": ["cardiac", "heart", "cardiovascular", "pacemaker", "defibrillator"],
+      "surgical": ["surgical", "surgery", "robotic surgery", "minimally invasive"],
+      "diabetes": ["diabetes", "glucose", "insulin", "endocrinology"],
+      "regulatory": ["regulatory", "fda", "compliance", "clinical trials"],
+      "clinical": ["clinical", "research", "trials", "patient"],
+      "software": ["software", "programming", "development", "coding"],
+      "hardware": ["hardware", "electronics", "embedded", "circuits"],
+      "quality": ["quality", "validation", "testing", "iso"],
+      "manufacturing": ["manufacturing", "production", "assembly", "scale-up"],
+      "data science": ["data science", "analytics", "statistics", "visualization"],
+      "biomedical": ["biomedical", "bioengineering", "medical device", "biomechanics"],
+      "firmware": ["firmware", "embedded software", "microcontroller", "real-time"],
+      "signal processing": ["signal processing", "dsp", "filtering", "algorithms"],
+      "user experience": ["user experience", "ux", "human factors", "usability"],
+      "project management": ["project management", "agile", "scrum", "leadership"]
+    };
+
+    // Find matching expertise area
+    for (const [area, keywords] of Object.entries(expertiseKeywords)) {
+      if (keywords.some(keyword => lowerQuery.includes(keyword))) {
+        expertiseArea = area;
+        break;
+      }
+    }
+
+    if (expertiseArea) {
+      // Find people with matching skills
+      relevantPeople = this.people.filter(person => {
+        const personSkills = person.skills.join(" ").toLowerCase();
+        const personBio = person.bio?.toLowerCase() || "";
+        const personTitle = person.title.toLowerCase();
+        
+        return expertiseKeywords[expertiseArea].some(keyword => 
+          personSkills.includes(keyword) || 
+          personBio.includes(keyword) || 
+          personTitle.includes(keyword)
+        );
+      });
+
+      // Sort by experience and patents (expertise indicators)
+      relevantPeople.sort((a, b) => 
+        (b.yearsExperience + b.patents * 2) - (a.yearsExperience + a.patents * 2)
+      );
+
+      if (relevantPeople.length > 0) {
+        answer = `Found ${relevantPeople.length} expert${relevantPeople.length > 1 ? 's' : ''} in ${expertiseArea}:\n\n`;
+        
+        relevantPeople.slice(0, 5).forEach((person, index) => {
+          const relevantSkills = person.skills.filter(skill => 
+            expertiseKeywords[expertiseArea].some(keyword => 
+              skill.toLowerCase().includes(keyword)
+            )
+          );
+          
+          // Find projects this person has worked on
+          const personProjects = this.projects.filter(project => 
+            project.teamMembers.includes(person.name)
+          );
+
+          answer += `${index + 1}. ${person.name} - ${person.title}\n`;
+          answer += `   📍 ${person.location} | ${person.yearsExperience} years experience | ${person.patents} patents\n`;
+          if (relevantSkills.length > 0) {
+            answer += `   🔧 Skills: ${relevantSkills.join(", ")}\n`;
+          }
+          if (personProjects.length > 0) {
+            answer += `   📋 Recent Projects: ${personProjects.slice(0, 3).map(p => p.name).join(", ")}\n`;
+            if (personProjects.length > 3) answer += `   ... and ${personProjects.length - 3} more projects\n`;
+          }
+          answer += `   📧 Contact: ${person.email}\n\n`;
+        });
+
+        if (relevantPeople.length > 5) {
+          answer += `... and ${relevantPeople.length - 5} more experts available in the team directory.`;
+        }
+      } else {
+        answer = `No specific experts found in ${expertiseArea}. Consider broadening your search or checking related skill areas.`;
+      }
+    } else {
+      // General expertise search
+      relevantPeople = this.people
+        .filter(p => p.patents > 3 || p.publications > 10)
+        .sort((a, b) => (b.patents + b.publications) - (a.patents + a.publications));
+      
+      answer = `Top technical experts by patent and publication count:\n\n`;
+      relevantPeople.slice(0, 5).forEach((person, index) => {
+        answer += `${index + 1}. ${person.name} - ${person.title}\n`;
+        answer += `   📊 ${person.patents} patents, ${person.publications} publications\n`;
+        answer += `   🔧 Expertise: ${person.skills.slice(0, 4).join(", ")}\n\n`;
+      });
+    }
+
+    const suggestions = [
+      "Click on expert profiles to see detailed experience and project history",
+      "Check patent portfolios for deep technical expertise",
+      "Review project team compositions for collaboration opportunities",
+      "Consider cross-functional expertise for complex challenges",
+      "Use specific technology keywords for more targeted results"
+    ];
+
+    // Find related projects based on expertise area
+    const relatedProjects = expertiseArea ? this.projects.filter(project => {
+      const projectSkills = project.skills.join(" ").toLowerCase();
+      const projectDesc = project.description.toLowerCase();
+      return expertiseKeywords[expertiseArea].some(keyword => 
+        projectSkills.includes(keyword) || projectDesc.includes(keyword)
+      );
+    }) : [];
+
+    return {
+      answer,
+      relevantPeople: relevantPeople.slice(0, 10),
+      relevantProjects: relatedProjects.slice(0, 5),
+      suggestions
     };
   }
 

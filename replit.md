@@ -18,6 +18,7 @@ Preferred communication style: Simple, everyday language.
 ✅ Add cornerstone trainings to education section in personal profiles - COMPLETED
 ✅ Enhance AI capabilities for broader project management questions (finding best person for specific problems) - COMPLETED (July 10, 2025)
 ✅ Include mock documents, bill of materials, parts, and drawings in projects - COMPLETED (July 10, 2025)
+✅ Integrate expertise discovery engine for finding experts by specific skills and project history - COMPLETED (July 10, 2025)
 
 ## System Architecture
 
@@ -80,6 +81,7 @@ The application uses a PostgreSQL database with the following main entities:
 - Automated insights and recommendations
 - **Enhanced Project Management Advice**: AI now provides qualitative guidance on risk management, team leadership, regulatory compliance, budget planning, and innovation strategies
 - **Contextual Expert Recommendations**: Smart suggestions for finding the right people for specific project challenges
+- **Expertise Discovery Engine**: Advanced search for experts by specific skills (battery, materials, python automation, signal processing, etc.) with project history and contact information
 
 ### Document Management
 - File upload capabilities with document type classification
