@@ -9,6 +9,7 @@ import { Separator } from "@/components/ui/separator";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Project, Person, Document, Activity } from "@shared/schema";
+import { ProjectTimeline } from "@/components/project-timeline";
 
 export default function ProjectDetail() {
   const { id } = useParams<{ id: string }>();
@@ -227,6 +228,12 @@ export default function ProjectDetail() {
               </CardContent>
             </Card>
 
+            {/* Project Timeline */}
+            <ProjectTimeline 
+              timeline={project.timeline || []} 
+              projectName={project.name}
+            />
+
             {/* Recent Activity */}
             <Card>
               <CardHeader>
@@ -281,7 +288,9 @@ export default function ProjectDetail() {
                         <AvatarFallback>{member.split(' ').map(n => n[0]).join('')}</AvatarFallback>
                       </Avatar>
                       <div className="flex-1">
-                        <p className="text-sm font-medium">{member}</p>
+                        <Link href={`/people/${member.toLowerCase().replace(/\s+/g, '-')}`}>
+                          <p className="text-sm font-medium text-blue-600 dark:text-blue-400 hover:underline cursor-pointer">{member}</p>
+                        </Link>
                         <p className="text-xs text-gray-500 dark:text-gray-400">
                           {project.roles[index] || "Team Member"}
                         </p>

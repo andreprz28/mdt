@@ -22,6 +22,38 @@ export async function loadSampleData(storage: IStorage) {
       recentActivity: [
         { description: "Validation Plan v3.2 uploaded", time: "2 hours ago" },
         { description: "Clinical Trial Results submitted", time: "1 day ago" }
+      ],
+      timeline: [
+        {
+          id: "research",
+          name: "Research & Development",
+          description: "Algorithm development and initial testing",
+          startDate: "2023-01-15",
+          endDate: "2023-08-30",
+          status: "completed" as const,
+          milestones: ["Algorithm design", "Prototype development", "Lab testing"],
+          deliverables: ["Research protocol", "Algorithm specifications", "Lab test results"]
+        },
+        {
+          id: "clinical",
+          name: "Clinical Trials",
+          description: "Multi-center clinical validation study",
+          startDate: "2023-09-01",
+          endDate: "2024-06-30",
+          status: "in_progress" as const,
+          milestones: ["Patient recruitment", "Data collection", "Interim analysis"],
+          deliverables: ["Clinical protocol", "Patient data", "Safety reports"]
+        },
+        {
+          id: "regulatory",
+          name: "FDA Approval",
+          description: "Regulatory submission and approval process",
+          startDate: "2024-07-01",
+          endDate: "2025-03-31",
+          status: "planned" as const,
+          milestones: ["Pre-submission meeting", "510(k) submission", "FDA response"],
+          deliverables: ["510(k) application", "Clinical data package", "FDA approval letter"]
+        }
       ]
     },
     {
@@ -146,6 +178,38 @@ export async function loadSampleData(storage: IStorage) {
       recentActivity: [
         { description: "Haptic feedback system calibration completed", time: "3 hours ago" },
         { description: "Surgeon training program development ongoing", time: "1 day ago" }
+      ],
+      timeline: [
+        {
+          id: "design",
+          name: "Design & Engineering",
+          description: "System architecture and component design",
+          startDate: "2022-03-01",
+          endDate: "2023-02-28",
+          status: "completed" as const,
+          milestones: ["System architecture", "Component design", "Integration testing"],
+          deliverables: ["Design specifications", "Component models", "Integration protocols"]
+        },
+        {
+          id: "development",
+          name: "Development & Testing",
+          description: "Hardware and software development with extensive testing",
+          startDate: "2023-03-01",
+          endDate: "2024-08-31",
+          status: "in_progress" as const,
+          milestones: ["Alpha prototype", "Beta testing", "Safety validation"],
+          deliverables: ["Working prototype", "Test results", "Safety documentation"]
+        },
+        {
+          id: "validation",
+          name: "Clinical Validation",
+          description: "Clinical trials and surgeon training programs",
+          startDate: "2024-09-01",
+          endDate: "2025-06-30",
+          status: "planned" as const,
+          milestones: ["Clinical protocol", "Surgeon training", "Outcome analysis"],
+          deliverables: ["Clinical data", "Training materials", "Outcome reports"]
+        }
       ]
     },
     {
@@ -406,7 +470,33 @@ export async function loadSampleData(storage: IStorage) {
       yearsExperience: 15,
       bio: "Leading expert in diabetes technology with 15 years of experience in medical device development.",
       education: ["PhD Biomedical Engineering - University of Minnesota", "MS Electrical Engineering - MIT"],
-      achievements: ["FDA Breakthrough Device Designation", "Medtronic Innovation Award 2023"]
+      achievements: ["FDA Breakthrough Device Designation", "Medtronic Innovation Award 2023"],
+      drmBelt: "green",
+      fellowships: ["bakken_fellow"],
+      cornerstoneTrainings: ["Design Controls", "Risk Management", "Statistical Process Control", "Human Factors"],
+      abstractsData: [
+        {
+          title: "Advanced Insulin Pump Control Algorithms",
+          conference: "2023 Diabetes Technology Conference: Global Session",
+          presentationDate: "2023-09-12",
+          description: "Novel control algorithms for automated insulin delivery systems with improved safety",
+          contributors: ["Dr. Emily Chen", "Michael Rodriguez"],
+          link: "/abstracts/insulin-algorithms-2023"
+        }
+      ],
+      patentsData: [
+        {
+          title: "Automated Insulin Delivery Control System",
+          patentNumber: "US10,987,654",
+          filingDate: "2022-03-15",
+          description: "Advanced control system for automated insulin pumps with predictive glucose management",
+          inventors: ["Sarah Johnson", "Dr. Emily Chen", "Michael Rodriguez"],
+          status: "Granted"
+        }
+      ],
+      connections: [
+        { projectId: "Lz4uI4DKk_39wc2-k4pdq", role: "Lead Engineer", skillsShared: ["Embedded Systems", "Diabetes Technology"] }
+      ]
     },
     {
       name: "Alex Park",
@@ -421,7 +511,50 @@ export async function loadSampleData(storage: IStorage) {
       yearsExperience: 8,
       bio: "AI/ML specialist developing next-generation diagnostic tools and predictive healthcare solutions.",
       education: ["PhD Computer Science - Stanford", "MS Data Science - Carnegie Mellon"],
-      achievements: ["Best Paper Award - MICCAI 2023", "AI Innovation Excellence Award"]
+      achievements: ["Best Paper Award - MICCAI 2023", "AI Innovation Excellence Award"],
+      drmBelt: "black",
+      fellowships: ["tech_fellow"],
+      cornerstoneTrainings: ["Design Controls", "Risk Management", "Clinical Research", "Quality Systems"],
+      abstractsData: [
+        {
+          title: "Deep Learning for Medical Image Analysis in Cardiac Diagnostics",
+          conference: "2023 Medical Imaging Conference: International Session",
+          presentationDate: "2023-11-15",
+          description: "Novel deep learning approach for automated cardiac anomaly detection with 97% accuracy",
+          contributors: ["Dr. Emily Chen", "Sarah Johnson", "Dr. Michael Chen"],
+          link: "/abstracts/cardiac-dl-2023"
+        },
+        {
+          title: "AI-Powered Predictive Analytics for Diabetes Management",
+          conference: "2024 S&T Conference: U.S. Session",
+          presentationDate: "2024-03-20",
+          description: "Machine learning models for predicting glucose trends and insulin requirements",
+          contributors: ["Dr. Emily Chen", "Jennifer Liu"],
+          link: "/abstracts/diabetes-ai-2024"
+        }
+      ],
+      patentsData: [
+        {
+          title: "System and Method for AI-Driven Medical Device Diagnostics",
+          patentNumber: "US11,234,567",
+          filingDate: "2023-01-15",
+          description: "Artificial intelligence system for real-time medical device performance analysis and predictive maintenance",
+          inventors: ["Alex Park", "Sarah Johnson", "Dr. Amanda Rodriguez"],
+          status: "Granted"
+        },
+        {
+          title: "Machine Learning Algorithm for Glucose Prediction",
+          patentNumber: "US11,345,678",
+          filingDate: "2023-06-10",
+          description: "Advanced ML algorithm for predicting blood glucose levels using continuous monitoring data",
+          inventors: ["Alex Park", "Dr. Emily Chen"],
+          status: "Pending"
+        }
+      ],
+      connections: [
+        { projectId: "n2nTn66b86zqcOR3Wo348", role: "Technical Lead", skillsShared: ["Machine Learning", "Healthcare AI"] },
+        { personId: "fWATy_r5mQh4H6w4lx7Tx", relationship: "Research Collaborator", sharedProjects: ["AI Diagnostic Assistant"] }
+      ]
     },
     {
       name: "Dr. Michael Chen",
@@ -451,7 +584,33 @@ export async function loadSampleData(storage: IStorage) {
       yearsExperience: 12,
       bio: "Robotic surgery expert leading development of next-generation surgical platforms.",
       education: ["MD Surgery - Harvard Medical School", "PhD Biomedical Engineering - MIT"],
-      achievements: ["Robotics Innovation Award", "Surgical Technology Pioneer"]
+      achievements: ["Robotics Innovation Award", "Surgical Technology Pioneer"],
+      drmBelt: "yellow",
+      fellowships: ["tech_fellow", "bakken_fellow"],
+      cornerstoneTrainings: ["Design Controls", "Risk Management", "Human Factors", "Cybersecurity", "Software Lifecycle"],
+      abstractsData: [
+        {
+          title: "AI-Enhanced Robotic Surgery: Future of Precision Medicine",
+          conference: "2024 S&T Conference: International Session",
+          presentationDate: "2024-05-18",
+          description: "Integration of artificial intelligence in robotic surgical systems for improved precision and outcomes",
+          contributors: ["Kevin Chang", "Rachel Green", "Alex Park"],
+          link: "/abstracts/ai-robotics-2024"
+        }
+      ],
+      patentsData: [
+        {
+          title: "Haptic Feedback System for Robotic Surgery",
+          patentNumber: "US11,567,890",
+          filingDate: "2023-08-22",
+          description: "Advanced haptic feedback mechanism for robotic surgical instruments",
+          inventors: ["Dr. Amanda Rodriguez", "Kevin Chang", "Rachel Green"],
+          status: "Granted"
+        }
+      ],
+      connections: [
+        { projectId: "hugo-robotic", role: "Director", skillsShared: ["Robotic Surgery", "AI/ML", "Systems Engineering"] }
+      ]
     },
     {
       name: "Jennifer Liu",

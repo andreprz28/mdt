@@ -19,6 +19,12 @@ export const projects = pgTable("projects", {
   skills: text("skills").array().notNull().default([]),
   milestones: text("milestones").array().notNull().default([]),
   recentActivity: jsonb("recent_activity").default([]),
+  // New fields for enhanced features
+  timeline: jsonb("timeline").default([]), // Project timeline with phases
+  billOfMaterials: jsonb("bill_of_materials").default([]), // BOM data
+  parts: jsonb("parts").default([]), // Parts data
+  drawings: jsonb("drawings").default([]), // Drawings data
+  mockDocuments: jsonb("mock_documents").default([]), // Mock document references
   createdAt: timestamp("created_at").defaultNow(),
   updatedAt: timestamp("updated_at").defaultNow(),
 });
@@ -39,6 +45,13 @@ export const people = pgTable("people", {
   yearsExperience: integer("years_experience").notNull().default(0),
   bio: text("bio"),
   achievements: text("achievements").array().notNull().default([]),
+  // New fields for enhanced features
+  drmBelt: text("drm_belt"), // "black", "green", "yellow", null
+  fellowships: text("fellowships").array().notNull().default([]), // ["tech_fellow", "bakken_fellow"]
+  cornerstoneTrainings: text("cornerstone_trainings").array().notNull().default([]),
+  abstractsData: jsonb("abstracts_data").default([]), // Array of abstract objects
+  patentsData: jsonb("patents_data").default([]), // Array of patent objects
+  connections: jsonb("connections").default([]), // Network connections data
   createdAt: timestamp("created_at").defaultNow(),
   updatedAt: timestamp("updated_at").defaultNow(),
 });

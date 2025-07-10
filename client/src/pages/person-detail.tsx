@@ -7,6 +7,10 @@ import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Person, Project } from "@shared/schema";
+import { BeltFellowshipIndicators } from "@/components/belt-fellowship-indicators";
+import { InteractiveAbstracts } from "@/components/interactive-abstracts";
+import { InteractivePatents } from "@/components/interactive-patents";
+import { ConnectionNetwork } from "@/components/connection-network";
 
 export default function PersonDetail() {
   const { id } = useParams<{ id: string }>();
@@ -157,6 +161,13 @@ export default function PersonDetail() {
                   <span className="text-gray-600 dark:text-gray-400">active projects</span>
                 </div>
               </div>
+              
+              <div className="mt-4">
+                <BeltFellowshipIndicators 
+                  drmBelt={person.drmBelt} 
+                  fellowships={person.fellowships || []} 
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -192,109 +203,58 @@ export default function PersonDetail() {
               </CardContent>
             </Card>
 
-            {/* Patents */}
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <Award className="h-5 w-5" />
-                  Patents
-                  <Badge variant="secondary" className="ml-2">{mockPatents.length}</Badge>
-                </CardTitle>
-                <CardDescription>
-                  Intellectual property contributions and innovations
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-4">
-                  {mockPatents.map((patent) => (
-                    <div key={patent.id} className="border border-gray-200 dark:border-gray-700 rounded-lg p-4">
-                      <div className="flex items-start justify-between gap-4">
-                        <div className="flex-1">
-                          <div className="flex items-center gap-2 mb-2">
-                            <h4 className="font-medium">{patent.title}</h4>
-                            <Badge variant={patent.status === "Granted" ? "default" : "secondary"} className="text-xs">
-                              {patent.status}
-                            </Badge>
-                          </div>
-                          <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">
-                            {patent.description}
-                          </p>
-                          <div className="flex items-center gap-4 text-xs text-gray-500 dark:text-gray-400">
-                            <span>Patent ID: {patent.id}</span>
-                            <span>Year: {patent.year}</span>
-                            <span>Category: {patent.category}</span>
-                          </div>
-                          <div className="mt-2">
-                            <span className="text-xs text-gray-500 dark:text-gray-400">
-                              Co-inventors: {patent.coInventors.join(", ")}
-                            </span>
-                          </div>
-                        </div>
-                        <Button variant="outline" size="sm">
-                          View Patent
-                        </Button>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
+            {/* Interactive Abstracts */}
+            <InteractiveAbstracts 
+              abstracts={person.abstractsData || []} 
+            />
 
-            {/* Publications */}
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <BookOpen className="h-5 w-5" />
-                  Publications
-                  <Badge variant="secondary" className="ml-2">{mockPublications.length}</Badge>
-                </CardTitle>
-                <CardDescription>
-                  Research publications and academic contributions
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-4">
-                  {mockPublications.map((publication, index) => (
-                    <div key={index} className="border border-gray-200 dark:border-gray-700 rounded-lg p-4">
-                      <div className="flex items-start justify-between gap-4">
-                        <div className="flex-1">
-                          <h4 className="font-medium mb-2">{publication.title}</h4>
-                          <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
-                            {publication.journal} • {publication.year}
-                          </p>
-                          <div className="flex items-center gap-4 text-xs text-gray-500 dark:text-gray-400">
-                            <span>{publication.citations} citations</span>
-                            <span>Authors: {publication.authors.join(", ")}</span>
-                          </div>
-                        </div>
-                        <Button variant="outline" size="sm">
-                          View Paper
-                        </Button>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
+            {/* Interactive Patents */}
+            <InteractivePatents 
+              patents={person.patentsData || []} 
+            />
+
+            {/* Connection Network */}
+            <ConnectionNetwork 
+              connections={person.connections || []} 
+              personName={person.name}
+            />
           </div>
 
           {/* Sidebar */}
           <div className="space-y-6">
-            {/* Education */}
+            {/* Education & Training */}
             <Card>
               <CardHeader>
-                <CardTitle>Education</CardTitle>
+                <CardTitle>Education & Training</CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="space-y-3">
-                  {person.education?.map((edu, index) => (
-                    <div key={index} className="text-sm">
-                      <p className="font-medium">{edu}</p>
+                <div className="space-y-4">
+                  <div>
+                    <h4 className="font-medium mb-2">Formal Education</h4>
+                    <div className="space-y-2">
+                      {person.education?.map((edu, index) => (
+                        <div key={index} className="text-sm">
+                          <p className="font-medium">{edu}</p>
+                        </div>
+                      )) || (
+                        <p className="text-sm text-gray-500 dark:text-gray-400">
+                          Education information not available
+                        </p>
+                      )}
                     </div>
-                  )) || (
-                    <p className="text-sm text-gray-500 dark:text-gray-400">
-                      Education information not available
-                    </p>
+                  </div>
+                  
+                  {person.cornerstoneTrainings && person.cornerstoneTrainings.length > 0 && (
+                    <div>
+                      <h4 className="font-medium mb-2">Cornerstone Trainings</h4>
+                      <div className="flex flex-wrap gap-2">
+                        {person.cornerstoneTrainings.map((training, index) => (
+                          <Badge key={index} variant="outline" className="text-xs">
+                            {training}
+                          </Badge>
+                        ))}
+                      </div>
+                    </div>
                   )}
                 </div>
               </CardContent>

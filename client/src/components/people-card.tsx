@@ -1,6 +1,7 @@
 import { Badge } from "@/components/ui/badge";
 import { Person } from "@shared/schema";
 import { Link } from "wouter";
+import { BeltFellowshipIndicators } from "@/components/belt-fellowship-indicators";
 
 interface PeopleCardProps {
   person: Person;
@@ -69,6 +70,12 @@ export function PeopleCard({ person, searchQuery }: PeopleCardProps) {
             {person.patents > 0 && person.publications > 0 && ' • '}
             {person.publications > 0 && `${person.publications} publications`}
           </span>
+        </div>
+        <div className="mt-2">
+          <BeltFellowshipIndicators 
+            drmBelt={person.drmBelt} 
+            fellowships={person.fellowships || []} 
+          />
         </div>
       </div>
       </div>
