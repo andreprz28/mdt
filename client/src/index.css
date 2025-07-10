@@ -1,0 +1,205 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: hsl(0, 0%, 100%);
+  --foreground: hsl(240, 10%, 3.9%);
+  --muted: hsl(240, 4.8%, 95.9%);
+  --muted-foreground: hsl(240, 3.8%, 45%);
+  --popover: hsl(0, 0%, 100%);
+  --popover-foreground: hsl(240, 10%, 3.9%);
+  --card: hsl(0, 0%, 100%);
+  --card-foreground: hsl(240, 10%, 3.9%);
+  --border: hsl(240, 5.9%, 90%);
+  --input: hsl(240, 5.9%, 90%);
+  --primary: hsl(207, 90%, 54%);
+  --primary-foreground: hsl(0, 0%, 98%);
+  --secondary: hsl(240, 4.8%, 95.9%);
+  --secondary-foreground: hsl(240, 5.9%, 10%);
+  --accent: hsl(240, 4.8%, 95.9%);
+  --accent-foreground: hsl(240, 5.9%, 10%);
+  --destructive: hsl(0, 84.2%, 60.2%);
+  --destructive-foreground: hsl(0, 0%, 98%);
+  --ring: hsl(240, 5.9%, 10%);
+  --radius: 0.5rem;
+  
+  /* Medtronic Colors */
+  --medtronic-50: hsl(213, 100%, 97%);
+  --medtronic-100: hsl(213, 100%, 94%);
+  --medtronic-200: hsl(213, 100%, 87%);
+  --medtronic-300: hsl(213, 100%, 78%);
+  --medtronic-400: hsl(213, 100%, 69%);
+  --medtronic-500: hsl(207, 90%, 54%);
+  --medtronic-600: hsl(207, 90%, 54%);
+  --medtronic-700: hsl(213, 100%, 40%);
+  --medtronic-800: hsl(213, 100%, 31%);
+  --medtronic-900: hsl(213, 100%, 22%);
+}
+
+.dark {
+  --background: hsl(240, 10%, 3.9%);
+  --foreground: hsl(0, 0%, 98%);
+  --muted: hsl(240, 3.7%, 15.9%);
+  --muted-foreground: hsl(240, 5%, 64.9%);
+  --popover: hsl(240, 10%, 3.9%);
+  --popover-foreground: hsl(0, 0%, 98%);
+  --card: hsl(240, 10%, 3.9%);
+  --card-foreground: hsl(0, 0%, 98%);
+  --border: hsl(240, 3.7%, 15.9%);
+  --input: hsl(240, 3.7%, 15.9%);
+  --primary: hsl(207, 90%, 54%);
+  --primary-foreground: hsl(0, 0%, 98%);
+  --secondary: hsl(240, 3.7%, 15.9%);
+  --secondary-foreground: hsl(0, 0%, 98%);
+  --accent: hsl(240, 3.7%, 15.9%);
+  --accent-foreground: hsl(0, 0%, 98%);
+  --destructive: hsl(0, 62.8%, 30.6%);
+  --destructive-foreground: hsl(0, 0%, 98%);
+  --ring: hsl(240, 4.9%, 83.9%);
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+@layer utilities {
+  .medtronic-gradient {
+    background: linear-gradient(135deg, hsl(207, 90%, 54%) 0%, hsl(213, 100%, 69%) 100%);
+  }
+  
+  .lives-counter {
+    @apply medtronic-gradient;
+    animation: pulse-glow 3s ease-in-out infinite;
+  }
+  
+  @keyframes pulse-glow {
+    0%, 100% { 
+      box-shadow: 0 0 20px hsla(207, 90%, 54%, 0.3); 
+    }
+    50% { 
+      box-shadow: 0 0 30px hsla(207, 90%, 54%, 0.5); 
+    }
+  }
+  
+  .search-highlight {
+    background-color: hsl(45, 93%, 88%);
+    font-weight: 600;
+    padding: 0 2px;
+    border-radius: 2px;
+  }
+  
+  .dark .search-highlight {
+    background-color: hsl(32, 95%, 44%);
+    color: hsl(45, 93%, 88%);
+  }
+  
+  .project-card {
+    transition: all 0.3s ease;
+    border-left: 4px solid hsl(240, 5.9%, 90%);
+  }
+  
+  .project-card:hover {
+    border-left-color: hsl(207, 90%, 54%);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px hsla(240, 10%, 3.9%, 0.1);
+  }
+  
+  .dark .project-card:hover {
+    box-shadow: 0 10px 25px hsla(240, 10%, 3.9%, 0.3);
+  }
+  
+  .activity-item {
+    border-left: 2px solid hsl(240, 5.9%, 90%);
+    padding-left: 16px;
+    margin-left: 8px;
+    position: relative;
+  }
+  
+  .activity-item::before {
+    content: '';
+    position: absolute;
+    left: -5px;
+    top: 8px;
+    width: 8px;
+    height: 8px;
+    background: hsl(207, 90%, 54%);
+    border-radius: 50%;
+  }
+  
+  .stage-indicator {
+    position: relative;
+  }
+  
+  .stage-indicator::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: -20px;
+    width: 40px;
+    height: 2px;
+    background: hsl(240, 5.9%, 90%);
+    transform: translateY(-50%);
+  }
+  
+  .stage-indicator.active::after {
+    background: hsl(207, 90%, 54%);
+  }
+  
+  .stage-indicator:last-child::after {
+    display: none;
+  }
+  
+  /* Status classes */
+  .status-active {
+    @apply bg-green-100 text-green-800 dark:bg-green-900/50 dark:text-green-200;
+  }
+  
+  .status-planning {
+    @apply bg-blue-100 text-blue-800 dark:bg-blue-900/50 dark:text-blue-200;
+  }
+  
+  .status-on-hold {
+    @apply bg-yellow-100 text-yellow-800 dark:bg-yellow-900/50 dark:text-yellow-200;
+  }
+  
+  .status-completed {
+    @apply bg-gray-100 text-gray-800 dark:bg-gray-900/50 dark:text-gray-200;
+  }
+  
+  .status-delayed {
+    @apply bg-red-100 text-red-800 dark:bg-red-900/50 dark:text-red-200;
+  }
+  
+  /* Stage classes */
+  .stage-concept {
+    @apply bg-purple-100 text-purple-800 dark:bg-purple-900/50 dark:text-purple-200;
+  }
+  
+  .stage-design {
+    @apply bg-blue-100 text-blue-800 dark:bg-blue-900/50 dark:text-blue-200;
+  }
+  
+  .stage-development {
+    @apply bg-orange-100 text-orange-800 dark:bg-orange-900/50 dark:text-orange-200;
+  }
+  
+  .stage-testing {
+    @apply bg-yellow-100 text-yellow-800 dark:bg-yellow-900/50 dark:text-yellow-200;
+  }
+  
+  .stage-validation {
+    @apply bg-green-100 text-green-800 dark:bg-green-900/50 dark:text-green-200;
+  }
+  
+  .stage-launch {
+    @apply bg-emerald-100 text-emerald-800 dark:bg-emerald-900/50 dark:text-emerald-200;
+  }
+}
