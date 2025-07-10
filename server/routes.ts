@@ -118,6 +118,15 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  app.get("/api/activities/:projectId", async (req, res) => {
+    try {
+      const activities = await storage.getActivities(req.params.projectId);
+      res.json(activities);
+    } catch (error) {
+      res.status(500).json({ error: "Failed to fetch activities" });
+    }
+  });
+
   app.post("/api/activities", async (req, res) => {
     try {
       const activityData = insertActivitySchema.parse(req.body);
@@ -137,6 +146,15 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const projectId = req.query.projectId as string;
       const documents = await storage.getDocuments(projectId);
+      res.json(documents);
+    } catch (error) {
+      res.status(500).json({ error: "Failed to fetch documents" });
+    }
+  });
+
+  app.get("/api/documents/:projectId", async (req, res) => {
+    try {
+      const documents = await storage.getDocuments(req.params.projectId);
       res.json(documents);
     } catch (error) {
       res.status(500).json({ error: "Failed to fetch documents" });

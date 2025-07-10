@@ -384,8 +384,49 @@ export default function ProjectDetail() {
                     </div>
                   )}
 
+                  {/* Uploaded Documents from Database */}
+                  {documents && documents.length > 0 && (
+                    <div>
+                      <h4 className="font-semibold mb-3 flex items-center gap-2">
+                        <FileText className="h-4 w-4" />
+                        Uploaded Documents
+                        <Badge variant="secondary">{documents.length}</Badge>
+                      </h4>
+                      <div className="grid gap-3">
+                        {documents.map((doc) => (
+                          <div key={doc.id} className="border border-gray-200 dark:border-gray-700 rounded-lg p-4">
+                            <div className="flex items-start justify-between gap-4">
+                              <div className="flex-1">
+                                <div className="flex items-center gap-2 mb-2">
+                                  <FileText className="h-4 w-4 text-gray-500" />
+                                  <h5 className="font-medium">{doc.name}</h5>
+                                  <Badge variant="outline" className="text-xs">v{doc.version}</Badge>
+                                  <Badge 
+                                    variant={doc.status === "active" ? "default" : "secondary"}
+                                    className="text-xs"
+                                  >
+                                    {doc.status}
+                                  </Badge>
+                                </div>
+                                <div className="flex items-center gap-4 text-xs text-gray-500 dark:text-gray-400">
+                                  <span>Type: {doc.type}</span>
+                                  <span>Size: {formatFileSize(doc.fileSize)}</span>
+                                  <span>Updated: {doc.uploadedAt ? new Date(doc.uploadedAt).toLocaleDateString() : 'Unknown'}</span>
+                                  <span>By: {doc.uploadedBy}</span>
+                                </div>
+                              </div>
+                              <Button variant="outline" size="sm">
+                                Download
+                              </Button>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
                   {/* Upload Documents */}
-                  {(!project.mockDocuments || project.mockDocuments.length === 0) && (
+                  {(!project.mockDocuments || project.mockDocuments.length === 0) && (!documents || documents.length === 0) && (
                     <div className="text-center py-8 text-gray-500 dark:text-gray-400">
                       <FileText className="h-12 w-12 mx-auto mb-3 text-gray-300" />
                       <p>No documents uploaded yet</p>
@@ -479,7 +520,7 @@ export default function ProjectDetail() {
               <CardContent className="space-y-4">
                 <div className="flex justify-between items-center">
                   <span className="text-sm text-gray-600 dark:text-gray-400">Documents</span>
-                  <span className="font-medium">{documents.length}</span>
+                  <span className="font-medium">{(project.mockDocuments?.length || 0) + documents.length}</span>
                 </div>
                 <div className="flex justify-between items-center">
                   <span className="text-sm text-gray-600 dark:text-gray-400">Activities</span>
