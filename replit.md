@@ -16,8 +16,8 @@ Preferred communication style: Simple, everyday language.
 ✅ Default homepage to show team statistics and project numbers - COMPLETED
 ✅ Make team member names clickable links to their profiles in project pages - COMPLETED
 ✅ Add cornerstone trainings to education section in personal profiles - COMPLETED
-⚠️ Enhance AI capabilities for broader project management questions (finding best person for specific problems) - IN PROGRESS
-⚠️ Include mock documents, bill of materials, parts, and drawings in projects - PARTIALLY COMPLETED
+✅ Enhance AI capabilities for broader project management questions (finding best person for specific problems) - COMPLETED (July 10, 2025)
+✅ Include mock documents, bill of materials, parts, and drawings in projects - COMPLETED (July 10, 2025)
 
 ## System Architecture
 
@@ -78,12 +78,22 @@ The application uses a PostgreSQL database with the following main entities:
 - Context-aware suggestions based on project data
 - Natural language search capabilities
 - Automated insights and recommendations
+- **Enhanced Project Management Advice**: AI now provides qualitative guidance on risk management, team leadership, regulatory compliance, budget planning, and innovation strategies
+- **Contextual Expert Recommendations**: Smart suggestions for finding the right people for specific project challenges
 
 ### Document Management
 - File upload capabilities with document type classification
 - Activity tracking for document uploads and updates
 - Document version control and metadata storage
 - Integration with project activity feeds
+- **Comprehensive Mock Document Library**: 50+ realistic documents across all projects including:
+  - Engineering drawings (.dwg files)
+  - Bills of Materials (Excel files)
+  - Technical specifications and design documents
+  - Clinical protocols and test reports
+  - Regulatory submission packages
+  - Software documentation and architecture specs
+  - Risk management files and validation documents
 
 ## Data Flow
 

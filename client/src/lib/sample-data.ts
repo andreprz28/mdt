@@ -1133,74 +1133,378 @@ export async function loadSampleData(storage: IStorage) {
     await storage.createActivity(activity);
   }
 
-  // Create sample documents
+  // Create comprehensive sample documents across all projects
   const sampleDocuments = [
+    // MiniMed 780G Documents (Project 1)
     {
       projectId: "1",
       name: "Technical Specification v2.1",
       type: "Technical Specification",
-      description: "Complete technical specifications for MiniMed 780G Advanced Insulin Pump",
       version: "2.1",
-      status: "active",
-      fileSize: 2450000,
-      filePath: "/documents/tech_spec_minimed_780g_v2.1.pdf",
       uploadedBy: "sarah.johnson@medtronic.com",
-      metadata: { 
-        category: "Technical", 
-        confidentiality: "Internal",
-        review_status: "Approved",
-        approved_by: "Dr. Emily Chen"
-      }
+      fileSize: 2450000,
+      filePath: "/documents/tech_spec_minimed_780g_v2.1.pdf"
     },
     {
       projectId: "1",
       name: "Design History File",
       type: "Design Control",
-      description: "Comprehensive design history documentation for regulatory submission",
       version: "1.0",
-      status: "active",
-      fileSize: 15600000,
-      filePath: "/documents/dhf_minimed_780g_v1.0.pdf",
       uploadedBy: "sarah.johnson@medtronic.com",
-      metadata: { 
-        category: "Regulatory", 
-        confidentiality: "Confidential",
-        review_status: "Under Review"
-      }
+      fileSize: 15600000,
+      filePath: "/documents/dhf_minimed_780g_v1.0.pdf"
     },
+    {
+      projectId: "1",
+      name: "Bill of Materials - Main Assembly",
+      type: "Bill of Materials",
+      version: "3.2",
+      uploadedBy: "michael.rodriguez@medtronic.com",
+      fileSize: 125000,
+      filePath: "/documents/bom_minimed_780g_main_v3.2.xlsx"
+    },
+    {
+      projectId: "1",
+      name: "Sensor Assembly Drawing",
+      type: "Engineering Drawing",
+      version: "R4",
+      uploadedBy: "sarah.johnson@medtronic.com",
+      fileSize: 890000,
+      filePath: "/documents/dwg_sensor_assembly_r4.dwg"
+    },
+    {
+      projectId: "1",
+      name: "Risk Management File",
+      type: "Risk Analysis",
+      version: "2.0",
+      uploadedBy: "dr.emily.chen@medtronic.com",
+      fileSize: 1800000,
+      filePath: "/documents/risk_mgmt_minimed_780g_v2.0.pdf"
+    },
+    {
+      projectId: "1",
+      name: "Software Design Document",
+      type: "Software Documentation",
+      version: "1.5",
+      uploadedBy: "rajesh.kumar@medtronic.com",
+      fileSize: 3200000,
+      filePath: "/documents/software_design_minimed_780g_v1.5.pdf"
+    },
+    {
+      projectId: "1",
+      name: "Clinical Evaluation Report",
+      type: "Clinical Documentation",
+      version: "1.0",
+      uploadedBy: "dr.emily.chen@medtronic.com",
+      fileSize: 4500000,
+      filePath: "/documents/clinical_eval_minimed_780g_v1.0.pdf"
+    },
+    {
+      projectId: "1",
+      name: "Validation Plan",
+      type: "Validation Document",
+      version: "3.2",
+      uploadedBy: "sarah.johnson@medtronic.com",
+      fileSize: 2100000,
+      filePath: "/documents/validation_plan_minimed_780g_v3.2.pdf"
+    },
+
+    // Guardian CGM Documents (Project 2)
     {
       projectId: "2",
       name: "Clinical Protocol v1.3",
       type: "Clinical Protocol",
-      description: "Clinical study protocol for Guardian CGM Real-Time Monitoring system",
       version: "1.3",
-      status: "active",
-      fileSize: 890000,
-      filePath: "/documents/guardian_cgm_clinical_protocol_v1.3.pdf",
       uploadedBy: "dr.emily.chen@medtronic.com",
-      metadata: { 
-        category: "Clinical", 
-        confidentiality: "Confidential",
-        review_status: "Approved",
-        irb_approval: "Pending"
-      }
+      fileSize: 890000,
+      filePath: "/documents/guardian_cgm_clinical_protocol_v1.3.pdf"
     },
+    {
+      projectId: "2",
+      name: "Device Master Record",
+      type: "Design Control",
+      version: "2.1",
+      uploadedBy: "maria.santos@medtronic.com",
+      fileSize: 12000000,
+      filePath: "/documents/dmr_guardian_cgm_v2.1.pdf"
+    },
+    {
+      projectId: "2",
+      name: "Transmitter Circuit Design",
+      type: "Engineering Drawing",
+      version: "R3",
+      uploadedBy: "kevin.chang@medtronic.com",
+      fileSize: 1200000,
+      filePath: "/documents/dwg_transmitter_circuit_r3.dwg"
+    },
+    {
+      projectId: "2",
+      name: "BOM - Sensor Components",
+      type: "Bill of Materials",
+      version: "2.8",
+      uploadedBy: "maria.santos@medtronic.com",
+      fileSize: 95000,
+      filePath: "/documents/bom_guardian_sensor_v2.8.xlsx"
+    },
+    {
+      projectId: "2",
+      name: "Sterilization Validation Report",
+      type: "Validation Document",
+      version: "1.0",
+      uploadedBy: "dr.sarah.williams@medtronic.com",
+      fileSize: 1600000,
+      filePath: "/documents/sterilization_validation_guardian_v1.0.pdf"
+    },
+    {
+      projectId: "2",
+      name: "Packaging Design Specifications",
+      type: "Design Documentation",
+      version: "2.2",
+      uploadedBy: "jennifer.liu@medtronic.com",
+      fileSize: 850000,
+      filePath: "/documents/packaging_spec_guardian_v2.2.pdf"
+    },
+
+    // TAVR System Documents (Project 4)
     {
       projectId: "4",
       name: "Biocompatibility Test Report",
       type: "Test Report",
-      description: "ISO 10993 biocompatibility testing results for TAVR device materials",
       version: "1.0",
-      status: "active",
-      fileSize: 1200000,
-      filePath: "/documents/tavr_biocompatibility_report_v1.0.pdf",
       uploadedBy: "dr.michael.chen@medtronic.com",
-      metadata: { 
-        category: "Testing", 
-        confidentiality: "Internal",
-        review_status: "Approved",
-        test_standard: "ISO 10993"
-      }
+      fileSize: 1200000,
+      filePath: "/documents/tavr_biocompatibility_report_v1.0.pdf"
+    },
+    {
+      projectId: "4",
+      name: "Valve Assembly Drawing",
+      type: "Engineering Drawing",
+      version: "R5",
+      uploadedBy: "dr.amanda.rodriguez@medtronic.com",
+      fileSize: 2300000,
+      filePath: "/documents/dwg_valve_assembly_r5.dwg"
+    },
+    {
+      projectId: "4",
+      name: "Delivery System BOM",
+      type: "Bill of Materials",
+      version: "4.1",
+      uploadedBy: "dr.michael.chen@medtronic.com",
+      fileSize: 180000,
+      filePath: "/documents/bom_tavr_delivery_system_v4.1.xlsx"
+    },
+    {
+      projectId: "4",
+      name: "Mechanical Testing Protocol",
+      type: "Test Protocol",
+      version: "2.0",
+      uploadedBy: "dr.amanda.rodriguez@medtronic.com",
+      fileSize: 1100000,
+      filePath: "/documents/mechanical_test_protocol_tavr_v2.0.pdf"
+    },
+    {
+      projectId: "4",
+      name: "Regulatory Submission Package",
+      type: "Regulatory Document",
+      version: "1.0",
+      uploadedBy: "dr.klaus.weber@medtronic.com",
+      fileSize: 25000000,
+      filePath: "/documents/regulatory_submission_tavr_v1.0.pdf"
+    },
+    {
+      projectId: "4",
+      name: "Manufacturing Process Flow",
+      type: "Process Documentation",
+      version: "1.2",
+      uploadedBy: "li.wei@medtronic.com",
+      fileSize: 650000,
+      filePath: "/documents/manufacturing_process_tavr_v1.2.pdf"
+    },
+
+    // Hugo Robotic System Documents (Project 5)
+    {
+      projectId: "5",
+      name: "System Architecture Document",
+      type: "Technical Specification",
+      version: "2.0",
+      uploadedBy: "kevin.chang@medtronic.com",
+      fileSize: 4200000,
+      filePath: "/documents/system_architecture_hugo_v2.0.pdf"
+    },
+    {
+      projectId: "5",
+      name: "Robotic Arm Assembly Drawing",
+      type: "Engineering Drawing",
+      version: "R6",
+      uploadedBy: "dr.amanda.rodriguez@medtronic.com",
+      fileSize: 3100000,
+      filePath: "/documents/dwg_robotic_arm_assembly_r6.dwg"
+    },
+    {
+      projectId: "5",
+      name: "Software Requirements Specification",
+      type: "Software Documentation",
+      version: "3.1",
+      uploadedBy: "rajesh.kumar@medtronic.com",
+      fileSize: 2800000,
+      filePath: "/documents/software_requirements_hugo_v3.1.pdf"
+    },
+    {
+      projectId: "5",
+      name: "BOM - Control System",
+      type: "Bill of Materials",
+      version: "5.0",
+      uploadedBy: "kevin.chang@medtronic.com",
+      fileSize: 220000,
+      filePath: "/documents/bom_hugo_control_system_v5.0.xlsx"
+    },
+    {
+      projectId: "5",
+      name: "Usability Study Report",
+      type: "Clinical Documentation",
+      version: "1.0",
+      uploadedBy: "dr.sarah.williams@medtronic.com",
+      fileSize: 1900000,
+      filePath: "/documents/usability_study_hugo_v1.0.pdf"
+    },
+    {
+      projectId: "5",
+      name: "Cybersecurity Assessment",
+      type: "Security Documentation",
+      version: "2.0",
+      uploadedBy: "rajesh.kumar@medtronic.com",
+      fileSize: 1400000,
+      filePath: "/documents/cybersecurity_assessment_hugo_v2.0.pdf"
+    },
+
+    // Percept DBS Documents (Project 6)
+    {
+      projectId: "6",
+      name: "Neurostimulator Design Record",
+      type: "Design Control",
+      version: "1.5",
+      uploadedBy: "dr.sarah.williams@medtronic.com",
+      fileSize: 8500000,
+      filePath: "/documents/design_record_percept_dbs_v1.5.pdf"
+    },
+    {
+      projectId: "6",
+      name: "Lead Design Drawing",
+      type: "Engineering Drawing",
+      version: "R4",
+      uploadedBy: "jennifer.liu@medtronic.com",
+      fileSize: 1600000,
+      filePath: "/documents/dwg_dbs_lead_design_r4.dwg"
+    },
+    {
+      projectId: "6",
+      name: "BOM - Neurostimulator Components",
+      type: "Bill of Materials",
+      version: "3.5",
+      uploadedBy: "jennifer.liu@medtronic.com",
+      fileSize: 145000,
+      filePath: "/documents/bom_percept_neurostimulator_v3.5.xlsx"
+    },
+    {
+      projectId: "6",
+      name: "Clinical Trial Protocol",
+      type: "Clinical Protocol",
+      version: "2.0",
+      uploadedBy: "dr.sarah.williams@medtronic.com",
+      fileSize: 1300000,
+      filePath: "/documents/clinical_trial_protocol_percept_v2.0.pdf"
+    },
+    {
+      projectId: "6",
+      name: "Battery Life Test Report",
+      type: "Test Report",
+      version: "1.0",
+      uploadedBy: "jennifer.liu@medtronic.com",
+      fileSize: 950000,
+      filePath: "/documents/battery_life_test_percept_v1.0.pdf"
+    },
+    {
+      projectId: "6",
+      name: "Programmer Interface Design",
+      type: "Software Documentation",
+      version: "2.3",
+      uploadedBy: "rajesh.kumar@medtronic.com",
+      fileSize: 1700000,
+      filePath: "/documents/programmer_interface_design_percept_v2.3.pdf"
+    },
+
+    // Additional documents for other projects
+    {
+      projectId: "7",
+      name: "Pacing Lead Technical Specification",
+      type: "Technical Specification",
+      version: "1.8",
+      uploadedBy: "dr.robert.kim@medtronic.com",
+      fileSize: 1250000,
+      filePath: "/documents/tech_spec_pacing_lead_v1.8.pdf"
+    },
+    {
+      projectId: "7",
+      name: "BOM - Pacing Lead Assembly",
+      type: "Bill of Materials",
+      version: "2.4",
+      uploadedBy: "dr.robert.kim@medtronic.com",
+      fileSize: 85000,
+      filePath: "/documents/bom_pacing_lead_assembly_v2.4.xlsx"
+    },
+    {
+      projectId: "8",
+      name: "Insulin Pen Design Drawing",
+      type: "Engineering Drawing",
+      version: "R3",
+      uploadedBy: "alex.park@medtronic.com",
+      fileSize: 920000,
+      filePath: "/documents/dwg_insulin_pen_design_r3.dwg"
+    },
+    {
+      projectId: "8",
+      name: "User Manual Draft",
+      type: "Technical Documentation",
+      version: "0.9",
+      uploadedBy: "alex.park@medtronic.com",
+      fileSize: 1800000,
+      filePath: "/documents/user_manual_insulin_pen_v0.9.pdf"
+    },
+    {
+      projectId: "9",
+      name: "Imaging System Architecture",
+      type: "Technical Specification",
+      version: "3.0",
+      uploadedBy: "rachel.green@medtronic.com",
+      fileSize: 5200000,
+      filePath: "/documents/imaging_system_architecture_v3.0.pdf"
+    },
+    {
+      projectId: "9",
+      name: "BOM - Imaging Components",
+      type: "Bill of Materials",
+      version: "1.7",
+      uploadedBy: "rachel.green@medtronic.com",
+      fileSize: 190000,
+      filePath: "/documents/bom_imaging_components_v1.7.xlsx"
+    },
+    {
+      projectId: "10",
+      name: "Surgical Instrument Drawing Set",
+      type: "Engineering Drawing",
+      version: "R2",
+      uploadedBy: "dr.michael.chen@medtronic.com",
+      fileSize: 2800000,
+      filePath: "/documents/dwg_surgical_instrument_set_r2.dwg"
+    },
+    {
+      projectId: "10",
+      name: "Manufacturing Quality Plan",
+      type: "Process Documentation",
+      version: "1.1",
+      uploadedBy: "li.wei@medtronic.com",
+      fileSize: 750000,
+      filePath: "/documents/manufacturing_quality_plan_v1.1.pdf"
     }
   ];
 

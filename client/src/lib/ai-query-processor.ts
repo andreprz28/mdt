@@ -59,6 +59,14 @@ export class AIQueryProcessor {
       return this.handleResourceQuery(query);
     }
 
+    // Project management advice and tips
+    if (lowerQuery.includes("how to") || lowerQuery.includes("advice") || lowerQuery.includes("tips") || 
+        lowerQuery.includes("best practices") || lowerQuery.includes("recommend") || lowerQuery.includes("improve") ||
+        lowerQuery.includes("strategy") || lowerQuery.includes("approach") || lowerQuery.includes("manage") ||
+        lowerQuery.includes("should i") || lowerQuery.includes("what if") || lowerQuery.includes("help")) {
+      return this.handleProjectManagementAdvice(query);
+    }
+
     // Default response for unrecognized queries
     return this.handleGeneralQuery(query);
   }
@@ -304,6 +312,91 @@ export class AIQueryProcessor {
         "Get team contact information",
         "Review delayed or at-risk projects"
       ]
+    };
+  }
+
+  private handleProjectManagementAdvice(query: string): AIQueryResponse {
+    const lowerQuery = query.toLowerCase();
+
+    // Risk management advice
+    if (lowerQuery.includes("risk") || lowerQuery.includes("delay") || lowerQuery.includes("behind")) {
+      return {
+        answer: "For managing project risks and delays in medical device development:\n\n1. **Early Risk Assessment**: Identify potential regulatory, technical, and resource risks during planning\n2. **Milestone Buffers**: Build 15-20% buffer time into critical path activities\n3. **Cross-functional Communication**: Weekly stakeholder updates prevent surprises\n4. **Regulatory Alignment**: Engage with regulatory teams early and often\n5. **Resource Contingency**: Maintain backup resources for critical skills\n\nFor current delayed projects, prioritize those closest to patient impact or regulatory deadlines.",
+        suggestions: [
+          "How to improve team communication?",
+          "Best practices for regulatory compliance?",
+          "Tips for managing scope creep?",
+          "How to accelerate FDA approval process?"
+        ],
+        relevantProjects: this.projects.filter(p => p.status === "Delayed" || p.status === "On Hold")
+      };
+    }
+
+    // Team management advice
+    if (lowerQuery.includes("team") || lowerQuery.includes("leadership") || lowerQuery.includes("communication")) {
+      return {
+        answer: "Effective team management in medical device projects:\n\n1. **Clear Role Definition**: Ensure each team member understands their responsibilities and decision-making authority\n2. **Regular Check-ins**: Schedule weekly 1:1s with key contributors and bi-weekly team meetings\n3. **Cross-functional Collaboration**: Foster connections between R&D, Clinical, Regulatory, and Quality teams\n4. **Knowledge Sharing**: Implement peer reviews and technical presentations\n5. **Mentorship Programs**: Pair experienced team members with newer colleagues\n\nFor complex projects, consider appointing technical leads for each major workstream.",
+        suggestions: [
+          "How to handle conflicting priorities?",
+          "Best practices for remote team management?",
+          "Tips for managing technical debt?",
+          "How to motivate underperforming team members?"
+        ],
+        relevantPeople: this.people.filter(p => p.title.toLowerCase().includes("lead") || p.title.toLowerCase().includes("manager"))
+      };
+    }
+
+    // Quality and compliance advice
+    if (lowerQuery.includes("quality") || lowerQuery.includes("compliance") || lowerQuery.includes("fda") || lowerQuery.includes("regulatory")) {
+      return {
+        answer: "Quality and regulatory compliance strategies:\n\n1. **Design Controls**: Implement rigorous design controls from concept through launch\n2. **Risk Management**: Follow ISO 14971 for systematic risk analysis\n3. **Documentation**: Maintain comprehensive design history files (DHF)\n4. **Testing Strategy**: Plan verification and validation activities early\n5. **Regulatory Pathway**: Align with FDA's predetermined pathway (510(k), PMA, De Novo)\n\nConsider engaging regulatory consultants for complex or first-in-class devices.",
+        suggestions: [
+          "How to prepare for FDA submissions?",
+          "Best practices for clinical trials?",
+          "Tips for managing design changes?",
+          "How to streamline quality processes?"
+        ],
+        relevantProjects: this.projects.filter(p => p.function === "Regulatory" || p.function === "Quality")
+      };
+    }
+
+    // Budget and resource management
+    if (lowerQuery.includes("budget") || lowerQuery.includes("cost") || lowerQuery.includes("resource") || lowerQuery.includes("allocation")) {
+      return {
+        answer: "Resource and budget management best practices:\n\n1. **Activity-Based Costing**: Track costs by project phase and function\n2. **Resource Forecasting**: Plan resources 2-3 quarters ahead\n3. **Portfolio Balancing**: Balance high-risk/high-reward projects with stable revenue generators\n4. **Vendor Management**: Develop strategic partnerships with key suppliers\n5. **ROI Tracking**: Monitor project ROI and adjust priorities accordingly\n\nFor medical devices, allocate 30-40% of budget to regulatory and clinical activities.",
+        suggestions: [
+          "How to justify project investments?",
+          "Best practices for vendor negotiations?",
+          "Tips for managing scope creep?",
+          "How to optimize resource utilization?"
+        ]
+      };
+    }
+
+    // Innovation and technology advice
+    if (lowerQuery.includes("innovation") || lowerQuery.includes("technology") || lowerQuery.includes("digital") || lowerQuery.includes("ai")) {
+      return {
+        answer: "Innovation and technology integration strategies:\n\n1. **Technology Roadmapping**: Align technology investments with business strategy\n2. **Digital Health Integration**: Consider connectivity and data analytics from the start\n3. **AI/ML Applications**: Explore AI for diagnostics, personalization, and predictive analytics\n4. **User-Centered Design**: Involve clinicians and patients in design processes\n5. **Intellectual Property**: Develop strong IP portfolio to protect innovations\n\nFor digital health solutions, ensure cybersecurity and data privacy compliance.",
+        suggestions: [
+          "How to evaluate new technologies?",
+          "Best practices for digital health projects?",
+          "Tips for managing technical debt?",
+          "How to foster innovation culture?"
+        ],
+        relevantProjects: this.projects.filter(p => p.category === "Digital Health" || p.name.toLowerCase().includes("ai"))
+      };
+    }
+
+    // General project management advice
+    return {
+      answer: "General project management principles for medical device development:\n\n1. **Patient-Centric Focus**: Always prioritize patient outcomes and safety\n2. **Agile Methodology**: Use iterative development with regular feedback loops\n3. **Stakeholder Engagement**: Maintain active communication with all stakeholders\n4. **Continuous Learning**: Conduct post-project reviews and share lessons learned\n5. **Metrics-Driven**: Track key performance indicators and adjust strategies accordingly\n\nRemember that medical device projects require longer timelines due to regulatory requirements.",
+      suggestions: [
+        "How to handle project delays?",
+        "Best practices for cross-functional teams?",
+        "Tips for managing stakeholder expectations?",
+        "How to improve project efficiency?"
+      ],
+      relevantProjects: this.projects.slice(0, 5)
     };
   }
 }
