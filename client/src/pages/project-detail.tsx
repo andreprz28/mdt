@@ -425,14 +425,19 @@ export default function ProjectDetail() {
                     </div>
                   )}
 
-                  {/* Upload Documents */}
+                  {/* Agile Integration Message */}
                   {(!project.mockDocuments || project.mockDocuments.length === 0) && (!documents || documents.length === 0) && (
                     <div className="text-center py-8 text-gray-500 dark:text-gray-400">
                       <FileText className="h-12 w-12 mx-auto mb-3 text-gray-300" />
                       <p>No documents uploaded yet</p>
-                      <Button variant="outline" className="mt-3" size="sm">
-                        Upload Document
-                      </Button>
+                      <div className="mt-4 p-4 bg-blue-50 dark:bg-blue-950 rounded-lg border border-blue-200 dark:border-blue-800">
+                        <p className="text-blue-700 dark:text-blue-300 font-medium">
+                          🚀 Agile Integration Coming Soon
+                        </p>
+                        <p className="text-sm text-blue-600 dark:text-blue-400 mt-1">
+                          Direct document upload and project management integration in development
+                        </p>
+                      </div>
                     </div>
                   )}
                 </div>

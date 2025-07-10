@@ -110,12 +110,10 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-4">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-[hsl(207,90%,54%)] rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-lg">M</span>
-              </div>
+              <img src="/attached_assets/2_1752183035463.png" alt="MedMilestones Logo" className="w-10 h-10 rounded-lg" />
               <div>
-                <h1 className="text-xl font-bold text-gray-900 dark:text-white">Project Intelligence Platform</h1>
-                <p className="text-sm text-gray-600 dark:text-gray-400">Medtronic Internal Tool</p>
+                <h1 className="text-xl font-bold text-gray-900 dark:text-white">MedMilestones</h1>
+                <p className="text-sm text-gray-600 dark:text-gray-400">Medical Device Project Intelligence</p>
               </div>
             </div>
             <div className="flex items-center gap-4">
@@ -147,42 +145,9 @@ export default function Home() {
       </header>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-        {/* Hero Section with Lives Saved Counter and Team Stats */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
-          {/* Lives Saved Counter */}
+        {/* Hero Section with Lives Saved Counter */}
+        <div className="mb-8">
           <LivesCounter />
-
-          {/* Team Statistics Card */}
-          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6">
-            <div className="flex items-center gap-3 mb-4">
-              <div className="w-8 h-8 bg-blue-100 dark:bg-blue-900 rounded-lg flex items-center justify-center">
-                <Users className="h-5 w-5 text-blue-600 dark:text-blue-400" />
-              </div>
-              <h3 className="text-lg font-semibold">Team Overview</h3>
-            </div>
-            <div className="grid grid-cols-2 gap-4">
-              <div className="text-center">
-                <div className="text-2xl font-bold text-blue-600 dark:text-blue-400">{people.length}</div>
-                <div className="text-sm text-gray-600 dark:text-gray-400">Team Members</div>
-              </div>
-              <div className="text-center">
-                <div className="text-2xl font-bold text-green-600 dark:text-green-400">{projects.length}</div>
-                <div className="text-sm text-gray-600 dark:text-gray-400">Active Projects</div>
-              </div>
-              <div className="text-center">
-                <div className="text-2xl font-bold text-purple-600 dark:text-purple-400">
-                  {people.reduce((sum, person) => sum + (person.patents || 0), 0)}
-                </div>
-                <div className="text-sm text-gray-600 dark:text-gray-400">Total Patents</div>
-              </div>
-              <div className="text-center">
-                <div className="text-2xl font-bold text-orange-600 dark:text-orange-400">
-                  {people.reduce((sum, person) => sum + (person.publications || 0), 0)}
-                </div>
-                <div className="text-sm text-gray-600 dark:text-gray-400">Publications</div>
-              </div>
-            </div>
-          </div>
         </div>
 
         {/* Search Interface */}
