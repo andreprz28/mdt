@@ -1311,7 +1311,35 @@ export async function loadSampleData(storage: IStorage) {
       yearsExperience: 10,
       bio: "Clinical research specialist focusing on diabetes care and continuous glucose monitoring technologies.",
       education: ["MD Endocrinology - Mayo Clinic", "PhD Clinical Research - University of Minnesota"],
-      achievements: ["ADA Clinical Excellence Award", "Diabetes Technology Innovation Grant"]
+      achievements: ["ADA Clinical Excellence Award", "Diabetes Technology Innovation Grant"],
+      abstractsData: [
+        {
+          title: "Clinical Outcomes of Continuous Glucose Monitoring in Type 1 Diabetes",
+          conference: "2024 American Diabetes Association Scientific Sessions",
+          presentationDate: "2024-06-25",
+          description: "Comprehensive analysis of clinical outcomes from CGM adoption in pediatric and adult T1D populations",
+          contributors: ["Dr. Emily Chen", "Sarah Johnson", "Dr. Michael Rodriguez"],
+          link: "/abstracts/cgm-outcomes-2024"
+        },
+        {
+          title: "Real-World Evidence for Automated Insulin Delivery Systems",
+          conference: "2023 EASD Annual Meeting",
+          presentationDate: "2023-10-10",
+          description: "Multi-center study demonstrating real-world effectiveness of hybrid closed-loop systems",
+          contributors: ["Dr. Emily Chen", "Jennifer Liu", "Alex Park"],
+          link: "/abstracts/aid-evidence-2023"
+        }
+      ],
+      patentsData: [
+        {
+          title: "Method for Glucose Trend Prediction in Diabetes Management",
+          patentNumber: "US11,456,789",
+          filingDate: "2023-02-10",
+          description: "Advanced algorithm for predicting glucose trends using continuous monitoring data and patient behavior patterns",
+          inventors: ["Dr. Emily Chen", "Sarah Johnson", "Alex Park"],
+          status: "Granted"
+        }
+      ]
     },
     {
       name: "Sarah Johnson",
@@ -1425,7 +1453,43 @@ export async function loadSampleData(storage: IStorage) {
       yearsExperience: 18,
       bio: "Interventional cardiologist specializing in transcatheter valve procedures and structural heart disease.",
       education: ["MD Cardiothoracic Surgery - Johns Hopkins", "Fellowship - Cleveland Clinic"],
-      achievements: ["ACC Innovation Award", "Pioneer in TAVR Technology"]
+      achievements: ["ACC Innovation Award", "Pioneer in TAVR Technology"],
+      abstractsData: [
+        {
+          title: "Five-Year Outcomes of Transcatheter Aortic Valve Replacement",
+          conference: "2024 American College of Cardiology Annual Meeting",
+          presentationDate: "2024-04-08",
+          description: "Long-term clinical outcomes and device durability in high-risk and intermediate-risk patients",
+          contributors: ["Dr. Michael Chen", "Lisa Wang", "Alex Thompson"],
+          link: "/abstracts/tavr-outcomes-2024"
+        },
+        {
+          title: "Novel Approaches to Structural Heart Disease Treatment",
+          conference: "2023 EuroPCR",
+          presentationDate: "2023-05-16",
+          description: "Innovative catheter-based interventions for complex structural heart conditions",
+          contributors: ["Dr. Michael Chen", "Dr. Amanda Rodriguez"],
+          link: "/abstracts/structural-heart-2023"
+        }
+      ],
+      patentsData: [
+        {
+          title: "Transcatheter Valve Delivery System with Enhanced Positioning",
+          patentNumber: "US11,678,901",
+          filingDate: "2023-03-20",
+          description: "Improved delivery catheter system for precise valve positioning during TAVR procedures",
+          inventors: ["Dr. Michael Chen", "Lisa Wang", "Alex Thompson"],
+          status: "Granted"
+        },
+        {
+          title: "Valve Sizing Algorithm for Transcatheter Procedures",
+          patentNumber: "US11,789,012",
+          filingDate: "2023-07-15",
+          description: "AI-assisted valve sizing system for optimal patient outcomes in transcatheter interventions",
+          inventors: ["Dr. Michael Chen", "Alex Park"],
+          status: "Pending"
+        }
+      ]
     },
     {
       name: "Dr. Amanda Rodriguez",
@@ -1481,7 +1545,27 @@ export async function loadSampleData(storage: IStorage) {
       yearsExperience: 11,
       bio: "Product management leader for neuromodulation therapies with focus on chronic pain solutions.",
       education: ["MBA - Wharton", "MS Biomedical Engineering - Northwestern"],
-      achievements: ["Product Launch Excellence Award", "Neuromodulation Innovation Leader"]
+      achievements: ["Product Launch Excellence Award", "Neuromodulation Innovation Leader"],
+      abstractsData: [
+        {
+          title: "Deep Brain Stimulation for Treatment-Resistant Depression",
+          conference: "2024 World Congress on Neuromodulation",
+          presentationDate: "2024-01-18",
+          description: "Clinical outcomes and patient selection criteria for DBS therapy in depression treatment",
+          contributors: ["Jennifer Liu", "Dr. Sarah Williams", "Dr. Robert Kim"],
+          link: "/abstracts/dbs-depression-2024"
+        }
+      ],
+      patentsData: [
+        {
+          title: "Closed-Loop Neurostimulation System for Chronic Pain",
+          patentNumber: "US11,890,123",
+          filingDate: "2023-09-05",
+          description: "Adaptive neurostimulation system with real-time feedback for chronic pain management",
+          inventors: ["Jennifer Liu", "Dr. Sarah Williams", "Kevin Chang"],
+          status: "Granted"
+        }
+      ]
     },
     {
       name: "Dr. Robert Kim",
@@ -1496,7 +1580,27 @@ export async function loadSampleData(storage: IStorage) {
       yearsExperience: 16,
       bio: "Electrophysiologist specializing in cardiac rhythm management and remote monitoring technologies.",
       education: ["MD Cardiology - Mayo Clinic", "Fellowship EP - Cleveland Clinic"],
-      achievements: ["HRS Excellence Award", "Cardiac Rhythm Innovation Grant"]
+      achievements: ["HRS Excellence Award", "Cardiac Rhythm Innovation Grant"],
+      abstractsData: [
+        {
+          title: "Remote Monitoring in Cardiac Implantable Electronic Devices",
+          conference: "2024 Heart Rhythm Society Annual Meeting",
+          presentationDate: "2024-05-15",
+          description: "Clinical outcomes and patient satisfaction with remote monitoring systems for pacemakers and ICDs",
+          contributors: ["Dr. Robert Kim", "Jennifer Liu", "Dr. Sarah Williams"],
+          link: "/abstracts/remote-monitoring-2024"
+        }
+      ],
+      patentsData: [
+        {
+          title: "Advanced Arrhythmia Detection Algorithm for Implantable Devices",
+          patentNumber: "US11,901,234",
+          filingDate: "2023-04-12",
+          description: "Machine learning-based algorithm for real-time arrhythmia detection and classification",
+          inventors: ["Dr. Robert Kim", "Alex Park", "Jennifer Liu"],
+          status: "Granted"
+        }
+      ]
     },
     {
       name: "Maria Santos",
@@ -1511,7 +1615,27 @@ export async function loadSampleData(storage: IStorage) {
       yearsExperience: 13,
       bio: "Global product manager driving diabetes care innovation across international markets.",
       education: ["MBA - INSEAD", "MS Business Analytics - Trinity College Dublin"],
-      achievements: ["Global Launch Excellence", "Diabetes Care Innovation Award"]
+      achievements: ["Global Launch Excellence", "Diabetes Care Innovation Award"],
+      abstractsData: [
+        {
+          title: "Global Market Access Strategies for Diabetes Technology",
+          conference: "2024 International Diabetes Technology Conference",
+          presentationDate: "2024-02-28",
+          description: "Comparative analysis of regulatory pathways and market access strategies across global diabetes markets",
+          contributors: ["Maria Santos", "Dr. Klaus Weber", "Li Wei"],
+          link: "/abstracts/global-market-access-2024"
+        }
+      ],
+      patentsData: [
+        {
+          title: "Smart Insulin Pen with Dosage Tracking",
+          patentNumber: "US11,012,345",
+          filingDate: "2023-11-08",
+          description: "Bluetooth-enabled insulin pen with automated dose logging and smartphone integration",
+          inventors: ["Maria Santos", "Liu Wei", "Dr. James Peterson"],
+          status: "Granted"
+        }
+      ]
     },
     {
       name: "Rajesh Kumar",
@@ -1526,7 +1650,27 @@ export async function loadSampleData(storage: IStorage) {
       yearsExperience: 14,
       bio: "Software architect specializing in healthcare digital solutions and cloud-native applications.",
       education: ["MS Computer Science - IIT Bangalore", "BS Software Engineering - BITS Pilani"],
-      achievements: ["Cloud Innovation Award", "Digital Health Pioneer"]
+      achievements: ["Cloud Innovation Award", "Digital Health Pioneer"],
+      abstractsData: [
+        {
+          title: "Microservices Architecture for Healthcare IoT Systems",
+          conference: "2024 IEEE International Conference on Healthcare Informatics",
+          presentationDate: "2024-03-12",
+          description: "Scalable microservices architecture for real-time medical device data processing and analytics",
+          contributors: ["Rajesh Kumar", "Priya Sharma", "Alex Park"],
+          link: "/abstracts/microservices-healthcare-2024"
+        }
+      ],
+      patentsData: [
+        {
+          title: "Secure Healthcare Data Exchange Protocol",
+          patentNumber: "US11,123,456",
+          filingDate: "2023-05-25",
+          description: "Blockchain-based secure data exchange protocol for healthcare applications",
+          inventors: ["Rajesh Kumar", "Priya Sharma", "Alex Park"],
+          status: "Granted"
+        }
+      ]
     },
     {
       name: "Dr. Sarah Williams",
@@ -1541,7 +1685,35 @@ export async function loadSampleData(storage: IStorage) {
       yearsExperience: 19,
       bio: "Neurologist and clinical researcher specializing in deep brain stimulation for movement disorders.",
       education: ["MD Neurology - Vanderbilt", "PhD Neuroscience - Washington University"],
-      achievements: ["Parkinson's Foundation Award", "Movement Disorder Society Recognition"]
+      achievements: ["Parkinson's Foundation Award", "Movement Disorder Society Recognition"],
+      abstractsData: [
+        {
+          title: "Long-term Outcomes of Deep Brain Stimulation in Parkinson's Disease",
+          conference: "2024 Movement Disorder Society International Congress",
+          presentationDate: "2024-09-15",
+          description: "15-year follow-up study of DBS outcomes in Parkinson's patients with motor and non-motor assessments",
+          contributors: ["Dr. Sarah Williams", "Jennifer Liu", "Dr. Robert Kim"],
+          link: "/abstracts/dbs-longterm-2024"
+        },
+        {
+          title: "Personalized DBS Programming Using AI-Driven Optimization",
+          conference: "2023 World Congress on Parkinson's Disease",
+          presentationDate: "2023-12-08",
+          description: "Machine learning approach to optimize DBS programming for individual patient outcomes",
+          contributors: ["Dr. Sarah Williams", "Alex Park", "Jennifer Liu"],
+          link: "/abstracts/ai-dbs-2023"
+        }
+      ],
+      patentsData: [
+        {
+          title: "Adaptive Deep Brain Stimulation System",
+          patentNumber: "US11,234,567",
+          filingDate: "2023-06-30",
+          description: "Closed-loop DBS system with real-time neural feedback and adaptive stimulation parameters",
+          inventors: ["Dr. Sarah Williams", "Jennifer Liu", "Dr. Robert Kim"],
+          status: "Granted"
+        }
+      ]
     },
     {
       name: "Li Wei",
@@ -1556,7 +1728,27 @@ export async function loadSampleData(storage: IStorage) {
       yearsExperience: 17,
       bio: "Operations leader driving global supply chain transformation and operational excellence initiatives.",
       education: ["MBA - NUS Business School", "MS Industrial Engineering - Tsinghua University"],
-      achievements: ["Supply Chain Excellence Award", "Digital Transformation Leader"]
+      achievements: ["Supply Chain Excellence Award", "Digital Transformation Leader"],
+      abstractsData: [
+        {
+          title: "Digital Supply Chain Transformation in Medical Device Manufacturing",
+          conference: "2024 Operations Management Conference",
+          presentationDate: "2024-04-22",
+          description: "Comprehensive digital transformation strategy for global medical device supply chain optimization",
+          contributors: ["Li Wei", "Maria Santos", "Kevin Chang"],
+          link: "/abstracts/supply-chain-digital-2024"
+        }
+      ],
+      patentsData: [
+        {
+          title: "AI-Driven Supply Chain Optimization System",
+          patentNumber: "US11,345,678",
+          filingDate: "2023-08-15",
+          description: "Machine learning system for predictive supply chain management in medical device manufacturing",
+          inventors: ["Li Wei", "Rajesh Kumar", "Alex Park"],
+          status: "Granted"
+        }
+      ]
     },
     {
       name: "Dr. Klaus Weber",
@@ -1571,7 +1763,25 @@ export async function loadSampleData(storage: IStorage) {
       yearsExperience: 22,
       bio: "Regulatory affairs expert with extensive experience in global medical device approvals and compliance.",
       education: ["PhD Regulatory Science - University of Bonn", "JD Medical Law - University of Vienna"],
-      achievements: ["Regulatory Excellence Award", "EU MDR Implementation Leader"]
+      achievements: ["Regulatory Excellence Award", "EU MDR Implementation Leader"],
+      abstractsData: [
+        {
+          title: "EU MDR Implementation: Lessons Learned and Best Practices",
+          conference: "2024 International Conference on Medical Device Regulation",
+          presentationDate: "2024-07-10",
+          description: "Comprehensive analysis of MDR implementation challenges and successful strategies across Europe",
+          contributors: ["Dr. Klaus Weber", "Francoise Dubois", "Yuki Nakamura"],
+          link: "/abstracts/mdr-implementation-2024"
+        },
+        {
+          title: "Harmonization of Global Regulatory Requirements for Medical Devices",
+          conference: "2023 World Medical Device Regulatory Summit",
+          presentationDate: "2023-11-28",
+          description: "Strategies for streamlining regulatory approvals across multiple global markets",
+          contributors: ["Dr. Klaus Weber", "Maria Santos", "Li Wei"],
+          link: "/abstracts/global-regulatory-2023"
+        }
+      ]
     },
     {
       name: "Dr. Elena Petrov",
@@ -1589,7 +1799,35 @@ export async function loadSampleData(storage: IStorage) {
       achievements: ["Battery Innovation Award", "Energy Storage Pioneer"],
       drmBelt: "green",
       fellowships: ["tech_fellow"],
-      cornerstoneTrainings: ["Design Controls", "Risk Management", "Materials Testing", "Reliability Engineering"]
+      cornerstoneTrainings: ["Design Controls", "Risk Management", "Materials Testing", "Reliability Engineering"],
+      abstractsData: [
+        {
+          title: "Advanced Lithium Battery Systems for Long-Term Implantable Devices",
+          conference: "2024 International Battery Technology Conference",
+          presentationDate: "2024-06-12",
+          description: "Next-generation lithium battery technologies for 15+ year implantable device applications",
+          contributors: ["Dr. Elena Petrov", "Carlos Mendoza", "Dr. Hans Mueller"],
+          link: "/abstracts/battery-implantable-2024"
+        }
+      ],
+      patentsData: [
+        {
+          title: "Long-Life Battery System for Implantable Medical Devices",
+          patentNumber: "US11,456,789",
+          filingDate: "2023-10-20",
+          description: "Advanced lithium battery system with extended lifespan for neurostimulation devices",
+          inventors: ["Dr. Elena Petrov", "Carlos Mendoza", "Jennifer Liu"],
+          status: "Granted"
+        },
+        {
+          title: "Power Management Circuit for Medical Implants",
+          patentNumber: "US11,567,890",
+          filingDate: "2023-12-05",
+          description: "Intelligent power management system for optimizing battery life in implantable devices",
+          inventors: ["Dr. Elena Petrov", "Dr. Hans Mueller"],
+          status: "Pending"
+        }
+      ]
     },
     {
       name: "Carlos Mendoza",
@@ -1607,7 +1845,43 @@ export async function loadSampleData(storage: IStorage) {
       achievements: ["Materials Innovation Excellence", "Biocompatibility Research Award"],
       drmBelt: "black",
       fellowships: ["bakken_fellow"],
-      cornerstoneTrainings: ["Design Controls", "Risk Management", "ISO 10993", "Materials Characterization"]
+      cornerstoneTrainings: ["Design Controls", "Risk Management", "ISO 10993", "Materials Characterization"],
+      abstractsData: [
+        {
+          title: "Biocompatible Materials for Next-Generation Cardiac Implants",
+          conference: "2024 Biomaterials World Congress",
+          presentationDate: "2024-05-28",
+          description: "Development of advanced biocompatible materials for long-term cardiac implant applications",
+          contributors: ["Carlos Mendoza", "Dr. Elena Petrov", "Dr. Michael Chen"],
+          link: "/abstracts/biocompatible-cardiac-2024"
+        },
+        {
+          title: "Polymer Engineering for Medical Device Applications",
+          conference: "2023 International Conference on Biomedical Materials",
+          presentationDate: "2023-09-20",
+          description: "Novel polymer formulations for improved biocompatibility and device performance",
+          contributors: ["Carlos Mendoza", "Dr. Amanda Rodriguez", "Isabella Romano"],
+          link: "/abstracts/polymer-medical-2023"
+        }
+      ],
+      patentsData: [
+        {
+          title: "Biocompatible Polymer Coating for Medical Implants",
+          patentNumber: "US11,678,901",
+          filingDate: "2023-07-18",
+          description: "Advanced polymer coating system for enhanced biocompatibility and reduced inflammation",
+          inventors: ["Carlos Mendoza", "Dr. Elena Petrov", "Dr. Michael Chen"],
+          status: "Granted"
+        },
+        {
+          title: "Ceramic-Metal Composite for Cardiac Valve Applications",
+          patentNumber: "US11,789,012",
+          filingDate: "2023-09-30",
+          description: "Novel ceramic-metal composite material for durable cardiac valve prosthetics",
+          inventors: ["Carlos Mendoza", "Dr. Amanda Rodriguez"],
+          status: "Granted"
+        }
+      ]
     },
     {
       name: "Priya Sharma",
@@ -1624,7 +1898,27 @@ export async function loadSampleData(storage: IStorage) {
       education: ["MS Computer Science - IIT Bombay", "BS Electronics Engineering - BITS Pilani"],
       achievements: ["Automation Excellence Award", "Digital Transformation Champion"],
       drmBelt: "yellow",
-      cornerstoneTrainings: ["Software Lifecycle", "Cybersecurity", "Design Controls", "Quality Systems"]
+      cornerstoneTrainings: ["Software Lifecycle", "Cybersecurity", "Design Controls", "Quality Systems"],
+      abstractsData: [
+        {
+          title: "Python-Based Automation Framework for Medical Device Testing",
+          conference: "2024 International Conference on Software Testing and Automation",
+          presentationDate: "2024-08-15",
+          description: "Comprehensive Python framework for automated testing of medical device software and firmware",
+          contributors: ["Priya Sharma", "Rajesh Kumar", "Alex Park"],
+          link: "/abstracts/python-automation-2024"
+        }
+      ],
+      patentsData: [
+        {
+          title: "Automated Test Data Generation System for Medical Devices",
+          patentNumber: "US11,890,123",
+          filingDate: "2023-11-12",
+          description: "AI-powered system for generating comprehensive test data for medical device validation",
+          inventors: ["Priya Sharma", "Alex Park", "Rajesh Kumar"],
+          status: "Granted"
+        }
+      ]
     },
     {
       name: "Dr. Hans Mueller",
@@ -1642,7 +1936,43 @@ export async function loadSampleData(storage: IStorage) {
       achievements: ["Signal Processing Innovation Award", "IEEE Fellow"],
       drmBelt: "green",
       fellowships: ["tech_fellow"],
-      cornerstoneTrainings: ["Design Controls", "Software Lifecycle", "Risk Management", "IEC 62304"]
+      cornerstoneTrainings: ["Design Controls", "Software Lifecycle", "Risk Management", "IEC 62304"],
+      abstractsData: [
+        {
+          title: "Real-Time Signal Processing for Cardiac Monitoring Devices",
+          conference: "2024 IEEE International Conference on Biomedical Engineering",
+          presentationDate: "2024-07-22",
+          description: "Advanced signal processing algorithms for real-time cardiac arrhythmia detection and analysis",
+          contributors: ["Dr. Hans Mueller", "Dr. Robert Kim", "Dr. Elena Petrov"],
+          link: "/abstracts/signal-processing-cardiac-2024"
+        },
+        {
+          title: "Neural Signal Processing for Deep Brain Stimulation",
+          conference: "2023 International Conference on Neural Engineering",
+          presentationDate: "2023-10-18",
+          description: "Novel signal processing techniques for closed-loop deep brain stimulation systems",
+          contributors: ["Dr. Hans Mueller", "Dr. Sarah Williams", "Jennifer Liu"],
+          link: "/abstracts/neural-signal-processing-2023"
+        }
+      ],
+      patentsData: [
+        {
+          title: "Advanced Signal Processing Algorithm for Cardiac Monitoring",
+          patentNumber: "US11,901,234",
+          filingDate: "2023-08-08",
+          description: "Real-time signal processing system for detecting cardiac arrhythmias with high accuracy",
+          inventors: ["Dr. Hans Mueller", "Dr. Robert Kim", "Alex Park"],
+          status: "Granted"
+        },
+        {
+          title: "Neural Signal Analysis System for Neurostimulation",
+          patentNumber: "US11,012,345",
+          filingDate: "2023-12-15",
+          description: "Advanced neural signal processing for adaptive neurostimulation therapy",
+          inventors: ["Dr. Hans Mueller", "Dr. Sarah Williams", "Jennifer Liu"],
+          status: "Pending"
+        }
+      ]
     },
     {
       name: "Isabella Romano",
@@ -1659,7 +1989,35 @@ export async function loadSampleData(storage: IStorage) {
       education: ["PhD Human Factors - Delft University", "MS Industrial Design - Politecnico Milano"],
       achievements: ["Design Excellence Award", "Human Factors Innovation Leader"],
       drmBelt: "yellow",
-      cornerstoneTrainings: ["Human Factors", "Design Controls", "Risk Management", "IEC 62366"]
+      cornerstoneTrainings: ["Human Factors", "Design Controls", "Risk Management", "IEC 62366"],
+      abstractsData: [
+        {
+          title: "Human Factors Engineering in Medical Device Design",
+          conference: "2024 International Conference on Human Factors in Healthcare",
+          presentationDate: "2024-09-05",
+          description: "Comprehensive approach to human factors engineering for safer medical device interfaces",
+          contributors: ["Isabella Romano", "Carlos Mendoza", "Dr. Amanda Rodriguez"],
+          link: "/abstracts/human-factors-medical-2024"
+        },
+        {
+          title: "User-Centered Design for Diabetes Management Systems",
+          conference: "2023 Healthcare Design Conference",
+          presentationDate: "2023-11-12",
+          description: "User research and design methodologies for improving diabetes care device usability",
+          contributors: ["Isabella Romano", "Maria Santos", "Dr. Emily Chen"],
+          link: "/abstracts/user-centered-diabetes-2023"
+        }
+      ],
+      patentsData: [
+        {
+          title: "Adaptive User Interface for Medical Device Control",
+          patentNumber: "US11,123,456",
+          filingDate: "2023-09-20",
+          description: "Intelligent user interface system that adapts to individual user preferences and capabilities",
+          inventors: ["Isabella Romano", "Alex Park", "Dr. Amanda Rodriguez"],
+          status: "Granted"
+        }
+      ]
     },
     {
       name: "Kevin Chang",
@@ -1676,7 +2034,35 @@ export async function loadSampleData(storage: IStorage) {
       education: ["MS Manufacturing Engineering - Northwestern", "BS Mechanical Engineering - University of Illinois"],
       achievements: ["Manufacturing Excellence Award", "Automation Innovation Leader"],
       drmBelt: "green",
-      cornerstoneTrainings: ["Design Controls", "Quality Systems", "Statistical Process Control", "Lean Six Sigma"]
+      cornerstoneTrainings: ["Design Controls", "Quality Systems", "Statistical Process Control", "Lean Six Sigma"],
+      abstractsData: [
+        {
+          title: "Robotic Automation in Medical Device Manufacturing",
+          conference: "2024 International Conference on Manufacturing Technology",
+          presentationDate: "2024-06-18",
+          description: "Implementation of robotic systems for precision manufacturing of medical devices",
+          contributors: ["Kevin Chang", "Dr. Amanda Rodriguez", "Li Wei"],
+          link: "/abstracts/robotic-manufacturing-2024"
+        }
+      ],
+      patentsData: [
+        {
+          title: "Automated Quality Control System for Medical Device Production",
+          patentNumber: "US11,234,567",
+          filingDate: "2023-07-25",
+          description: "AI-powered quality control system for real-time defect detection in medical device manufacturing",
+          inventors: ["Kevin Chang", "Priya Sharma", "Alex Park"],
+          status: "Granted"
+        },
+        {
+          title: "Flexible Manufacturing Cell for Medical Device Assembly",
+          patentNumber: "US11,345,678",
+          filingDate: "2023-10-10",
+          description: "Modular manufacturing system for flexible production of various medical device components",
+          inventors: ["Kevin Chang", "Dr. Amanda Rodriguez", "Li Wei"],
+          status: "Pending"
+        }
+      ]
     }
   ];
 
