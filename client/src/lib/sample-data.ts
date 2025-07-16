@@ -251,6 +251,127 @@ export async function loadSampleData(storage: IStorage) {
       recentActivity: [
         { description: "Mobile app UI/UX review completed", time: "1 hour ago" },
         { description: "Sensor accuracy testing in progress", time: "3 hours ago" }
+      ],
+      billOfMaterials: [
+        {
+          partNumber: "MDT-GRD-001",
+          description: "Real-time CGM Sensor",
+          quantity: 1,
+          unitCost: 78.25,
+          supplier: "Medtronic Internal",
+          leadTime: "2 weeks",
+          criticality: "High"
+        },
+        {
+          partNumber: "MDT-GRD-002",
+          description: "Bluetooth 5.0 Transmitter",
+          quantity: 1,
+          unitCost: 95.50,
+          supplier: "Nordic Semiconductor",
+          leadTime: "6 weeks",
+          criticality: "High"
+        },
+        {
+          partNumber: "MDT-GRD-003",
+          description: "Mobile App License",
+          quantity: 1,
+          unitCost: 15.00,
+          supplier: "Internal Software",
+          leadTime: "1 week",
+          criticality: "Medium"
+        }
+      ],
+      parts: [
+        {
+          partNumber: "MDT-GRD-001",
+          name: "Real-time CGM Sensor",
+          category: "Sensor",
+          material: "Biocompatible Polymer",
+          dimensions: "6mm x 0.5mm x 14mm",
+          weight: "1.2g",
+          sterilization: "ETO",
+          shelfLife: "18 months"
+        },
+        {
+          partNumber: "MDT-GRD-002",
+          name: "Bluetooth 5.0 Transmitter",
+          category: "Electronics",
+          material: "Medical Grade ABS",
+          dimensions: "28mm x 18mm x 9mm",
+          weight: "6.8g",
+          sterilization: "Gamma",
+          shelfLife: "60 months"
+        }
+      ],
+      drawings: [
+        {
+          drawingNumber: "DWG-GRD-001-R2",
+          title: "CGM Sensor Assembly",
+          type: "Assembly Drawing",
+          revision: "R2",
+          date: "2024-06-20",
+          engineer: "Dr. Emily Chen",
+          format: "PDF",
+          pages: 6
+        },
+        {
+          drawingNumber: "DWG-GRD-002-R1",
+          title: "Bluetooth Module Integration",
+          type: "Electrical Schematic",
+          revision: "R1",
+          date: "2024-05-15",
+          engineer: "James Wilson",
+          format: "PDF",
+          pages: 4
+        }
+      ],
+      mockDocuments: [
+        {
+          id: "DOC-GRD-001",
+          name: "System Requirements Document",
+          type: "Technical Specification",
+          version: "2.1",
+          size: "3.2 MB",
+          uploadedBy: "Dr. Emily Chen",
+          uploadedAt: "2024-07-05",
+          status: "Current"
+        },
+        {
+          id: "DOC-GRD-002",
+          name: "Mobile App Architecture",
+          type: "Software Design",
+          version: "1.8",
+          size: "1.9 MB",
+          uploadedBy: "James Wilson",
+          uploadedAt: "2024-07-01",
+          status: "Current"
+        },
+        {
+          id: "DOC-GRD-003",
+          name: "Clinical Validation Protocol",
+          type: "Clinical Document",
+          version: "1.0",
+          size: "4.7 MB",
+          uploadedBy: "Sarah Johnson",
+          uploadedAt: "2024-06-28",
+          status: "Under Review"
+        }
+      ],
+      revisions: [
+        {
+          version: "2.1",
+          date: "2024-07-05",
+          author: "Dr. Emily Chen",
+          changes: "Enhanced real-time alert algorithms",
+          reviewStatus: "Approved"
+        },
+        {
+          version: "2.0",
+          date: "2024-06-10",
+          author: "James Wilson",
+          changes: "Bluetooth connectivity improvements",
+          reviewStatus: "Approved"
+        }
       ]
     },
     {
@@ -271,6 +392,136 @@ export async function loadSampleData(storage: IStorage) {
       recentActivity: [
         { description: "Manufacturing delays due to component shortage", time: "2 days ago" },
         { description: "Bluetooth connectivity issues resolved", time: "1 week ago" }
+      ],
+      billOfMaterials: [
+        {
+          partNumber: "MDT-INP-001",
+          description: "Insulin Pen Body Assembly",
+          quantity: 1,
+          unitCost: 45.75,
+          supplier: "Medtronic Manufacturing",
+          leadTime: "4 weeks",
+          criticality: "High"
+        },
+        {
+          partNumber: "MDT-INP-002",
+          description: "Bluetooth Module BLE 5.2",
+          quantity: 1,
+          unitCost: 25.50,
+          supplier: "Espressif Systems",
+          leadTime: "8 weeks",
+          criticality: "Critical"
+        },
+        {
+          partNumber: "MDT-INP-003",
+          description: "Dose Counter Mechanism",
+          quantity: 1,
+          unitCost: 18.25,
+          supplier: "Precision Components Ltd",
+          leadTime: "3 weeks",
+          criticality: "High"
+        },
+        {
+          partNumber: "MDT-INP-004",
+          description: "Rechargeable Battery Pack",
+          quantity: 1,
+          unitCost: 12.00,
+          supplier: "Samsung SDI",
+          leadTime: "6 weeks",
+          criticality: "Medium"
+        }
+      ],
+      parts: [
+        {
+          partNumber: "MDT-INP-001",
+          name: "Insulin Pen Body Assembly",
+          category: "Mechanical",
+          material: "Medical Grade Aluminum",
+          dimensions: "150mm x 15mm x 12mm",
+          weight: "28g",
+          sterilization: "Autoclave",
+          shelfLife: "120 months"
+        },
+        {
+          partNumber: "MDT-INP-002",
+          name: "Bluetooth Module BLE 5.2",
+          category: "Electronics",
+          material: "FR4 PCB",
+          dimensions: "12mm x 8mm x 2mm",
+          weight: "1.5g",
+          sterilization: "Not Required",
+          shelfLife: "60 months"
+        }
+      ],
+      drawings: [
+        {
+          drawingNumber: "DWG-INP-001-R3",
+          title: "Pen Body Mechanical Assembly",
+          type: "Assembly Drawing",
+          revision: "R3",
+          date: "2024-05-10",
+          engineer: "Liu Wei",
+          format: "PDF",
+          pages: 8
+        },
+        {
+          drawingNumber: "DWG-INP-002-R2",
+          title: "Electronic Component Layout",
+          type: "Electrical Schematic",
+          revision: "R2",
+          date: "2024-04-25",
+          engineer: "Maria Santos",
+          format: "PDF",
+          pages: 5
+        }
+      ],
+      mockDocuments: [
+        {
+          id: "DOC-INP-001",
+          name: "Product Requirements Document",
+          type: "Requirements Document",
+          version: "1.5",
+          size: "2.8 MB",
+          uploadedBy: "Maria Santos",
+          uploadedAt: "2024-06-15",
+          status: "Current"
+        },
+        {
+          id: "DOC-INP-002",
+          name: "Manufacturing Process Plan",
+          type: "Process Document",
+          version: "2.0",
+          size: "4.2 MB",
+          uploadedBy: "Liu Wei",
+          uploadedAt: "2024-06-10",
+          status: "Current"
+        },
+        {
+          id: "DOC-INP-003",
+          name: "Bluetooth Protocol Specification",
+          type: "Technical Specification",
+          version: "1.2",
+          size: "1.8 MB",
+          uploadedBy: "Dr. James Peterson",
+          uploadedAt: "2024-06-05",
+          status: "Current"
+        }
+      ],
+      revisions: [
+        {
+          version: "1.5",
+          date: "2024-06-15",
+          author: "Maria Santos",
+          changes: "Updated manufacturing timeline due to component shortages",
+          reviewStatus: "Approved"
+        },
+        {
+          version: "1.4",
+          date: "2024-05-20",
+          author: "Liu Wei",
+          changes: "Resolved Bluetooth connectivity issues",
+          reviewStatus: "Approved"
+        }
       ]
     },
 
@@ -293,6 +544,127 @@ export async function loadSampleData(storage: IStorage) {
       recentActivity: [
         { description: "Biocompatibility Test Report uploaded", time: "4 hours ago" },
         { description: "Design Review Meeting scheduled", time: "2 days ago" }
+      ],
+      billOfMaterials: [
+        {
+          partNumber: "MDT-TAV-001",
+          description: "Transcatheter Valve Frame",
+          quantity: 1,
+          unitCost: 850.00,
+          supplier: "Medtronic Cardiac",
+          leadTime: "6 weeks",
+          criticality: "Critical"
+        },
+        {
+          partNumber: "MDT-TAV-002",
+          description: "Pericardial Tissue Leaflets",
+          quantity: 3,
+          unitCost: 275.00,
+          supplier: "Edwards Lifesciences",
+          leadTime: "4 weeks",
+          criticality: "Critical"
+        },
+        {
+          partNumber: "MDT-TAV-003",
+          description: "Delivery System Catheter",
+          quantity: 1,
+          unitCost: 450.00,
+          supplier: "Medtronic Vascular",
+          leadTime: "8 weeks",
+          criticality: "High"
+        }
+      ],
+      parts: [
+        {
+          partNumber: "MDT-TAV-001",
+          name: "Transcatheter Valve Frame",
+          category: "Implant",
+          material: "Nitinol",
+          dimensions: "26mm diameter x 15mm height",
+          weight: "12g",
+          sterilization: "ETO",
+          shelfLife: "60 months"
+        },
+        {
+          partNumber: "MDT-TAV-002",
+          name: "Pericardial Tissue Leaflets",
+          category: "Biological",
+          material: "Bovine Pericardium",
+          dimensions: "Custom shaped",
+          weight: "2.5g",
+          sterilization: "Glutaraldehyde",
+          shelfLife: "60 months"
+        }
+      ],
+      drawings: [
+        {
+          drawingNumber: "DWG-TAV-001-R4",
+          title: "Valve Frame Design",
+          type: "Assembly Drawing",
+          revision: "R4",
+          date: "2024-06-01",
+          engineer: "Dr. Michael Chen",
+          format: "PDF",
+          pages: 12
+        },
+        {
+          drawingNumber: "DWG-TAV-002-R3",
+          title: "Delivery System Assembly",
+          type: "Mechanical Drawing",
+          revision: "R3",
+          date: "2024-05-20",
+          engineer: "Alex Thompson",
+          format: "PDF",
+          pages: 8
+        }
+      ],
+      mockDocuments: [
+        {
+          id: "DOC-TAV-001",
+          name: "Clinical Trial Protocol",
+          type: "Clinical Document",
+          version: "2.0",
+          size: "8.5 MB",
+          uploadedBy: "Dr. Michael Chen",
+          uploadedAt: "2024-07-02",
+          status: "Current"
+        },
+        {
+          id: "DOC-TAV-002",
+          name: "Biocompatibility Assessment",
+          type: "Test Report",
+          version: "1.3",
+          size: "6.2 MB",
+          uploadedBy: "Lisa Wang",
+          uploadedAt: "2024-06-28",
+          status: "Current"
+        },
+        {
+          id: "DOC-TAV-003",
+          name: "510(k) Submission Package",
+          type: "Regulatory Document",
+          version: "1.0",
+          size: "15.8 MB",
+          uploadedBy: "Alex Thompson",
+          uploadedAt: "2024-06-25",
+          status: "Under Review"
+        }
+      ],
+      revisions: [
+        {
+          version: "2.0",
+          date: "2024-07-02",
+          author: "Dr. Michael Chen",
+          changes: "Updated clinical trial endpoints",
+          reviewStatus: "Approved"
+        },
+        {
+          version: "1.9",
+          date: "2024-06-10",
+          author: "Lisa Wang",
+          changes: "Enhanced biocompatibility testing protocols",
+          reviewStatus: "Approved"
+        }
       ]
     },
     {
@@ -697,6 +1069,127 @@ export async function loadSampleData(storage: IStorage) {
       recentActivity: [
         { description: "Model accuracy improved to 94.2%", time: "2 hours ago" },
         { description: "Clinical trial protocol approved", time: "1 day ago" }
+      ],
+      billOfMaterials: [
+        {
+          partNumber: "MDT-AI-001",
+          description: "AI Processing Server Hardware",
+          quantity: 4,
+          unitCost: 15000.00,
+          supplier: "NVIDIA Corporation",
+          leadTime: "12 weeks",
+          criticality: "Critical"
+        },
+        {
+          partNumber: "MDT-AI-002",
+          description: "Medical Imaging Interface Module",
+          quantity: 2,
+          unitCost: 8500.00,
+          supplier: "Philips Healthcare",
+          leadTime: "8 weeks",
+          criticality: "High"
+        },
+        {
+          partNumber: "MDT-AI-003",
+          description: "Software License (TensorFlow Enterprise)",
+          quantity: 1,
+          unitCost: 50000.00,
+          supplier: "Google Cloud",
+          leadTime: "1 week",
+          criticality: "Medium"
+        }
+      ],
+      parts: [
+        {
+          partNumber: "MDT-AI-001",
+          name: "AI Processing Server Hardware",
+          category: "Computing",
+          material: "Server Grade Components",
+          dimensions: "482mm x 800mm x 85mm",
+          weight: "25kg",
+          sterilization: "Not Required",
+          shelfLife: "60 months"
+        },
+        {
+          partNumber: "MDT-AI-002",
+          name: "Medical Imaging Interface Module",
+          category: "Interface",
+          material: "Medical Grade Electronics",
+          dimensions: "200mm x 150mm x 50mm",
+          weight: "2.5kg",
+          sterilization: "Not Required",
+          shelfLife: "84 months"
+        }
+      ],
+      drawings: [
+        {
+          drawingNumber: "DWG-AI-001-R2",
+          title: "System Architecture Diagram",
+          type: "System Diagram",
+          revision: "R2",
+          date: "2024-06-15",
+          engineer: "Alex Park",
+          format: "VSDX",
+          pages: 6
+        },
+        {
+          drawingNumber: "DWG-AI-002-R1",
+          title: "Data Flow Architecture",
+          type: "Software Architecture",
+          revision: "R1",
+          date: "2024-05-28",
+          engineer: "Jordan Kim",
+          format: "PDF",
+          pages: 4
+        }
+      ],
+      mockDocuments: [
+        {
+          id: "DOC-AI-001",
+          name: "Machine Learning Model Specification",
+          type: "Technical Specification",
+          version: "3.1",
+          size: "4.7 MB",
+          uploadedBy: "Alex Park",
+          uploadedAt: "2024-07-05",
+          status: "Current"
+        },
+        {
+          id: "DOC-AI-002",
+          name: "Clinical Validation Protocol",
+          type: "Clinical Document",
+          version: "1.2",
+          size: "7.3 MB",
+          uploadedBy: "Jordan Kim",
+          uploadedAt: "2024-07-01",
+          status: "Current"
+        },
+        {
+          id: "DOC-AI-003",
+          name: "HIPAA Compliance Assessment",
+          type: "Compliance Document",
+          version: "1.0",
+          size: "3.2 MB",
+          uploadedBy: "Taylor Swift",
+          uploadedAt: "2024-06-25",
+          status: "Current"
+        }
+      ],
+      revisions: [
+        {
+          version: "3.1",
+          date: "2024-07-05",
+          author: "Alex Park",
+          changes: "Improved model accuracy to 94.2%",
+          reviewStatus: "Approved"
+        },
+        {
+          version: "3.0",
+          date: "2024-06-20",
+          author: "Jordan Kim",
+          changes: "Added multi-modal imaging support",
+          reviewStatus: "Approved"
+        }
       ]
     },
     {
