@@ -3,16 +3,16 @@ import { TrendingUp, Heart } from "lucide-react";
 
 export function LivesCounter() {
   const [livesSaved, setLivesSaved] = useState(2847956);
-  const [livesPerMinute, setLivesPerMinute] = useState(2.3);
+  const [livesPerSecond, setLivesPerSecond] = useState(2.3);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      // Simulate lives saved incrementing
-      setLivesSaved(prev => prev + Math.floor(Math.random() * 3) + 1);
+      // Simulate lives saved incrementing every second
+      setLivesSaved(prev => prev + Math.floor(Math.random() * 3) + 2);
       
-      // Slight variation in lives per minute
-      setLivesPerMinute(2.3 + (Math.random() - 0.5) * 0.2);
-    }, 60000); // Update every minute
+      // Slight variation in lives per second
+      setLivesPerSecond(2.3 + (Math.random() - 0.5) * 0.2);
+    }, 1000); // Update every second
 
     return () => clearInterval(interval);
   }, []);
@@ -29,7 +29,7 @@ export function LivesCounter() {
         <div className="text-sm opacity-75 flex items-center justify-center gap-4">
           <span className="inline-flex items-center gap-1">
             <TrendingUp className="w-4 h-4 text-green-200" />
-            <span>{livesPerMinute.toFixed(1)} lives/minute</span>
+            <span>{livesPerSecond.toFixed(1)} lives/second</span>
           </span>
           <span className="inline-flex items-center gap-1">
             <Heart className="w-4 h-4 text-red-200" />
